@@ -30,11 +30,11 @@ const Header = () => {
     <div
       className={`w-full rounded-none px-5 py-1 bg-white shadow-[0_2px_7px_0px_rgba(6,23,48,0.1)]`}
     >
-      <div className="flex justify-between items-center container mx-auto">
-        <Link className="block w-12 h-12 md:w-16 md:h-16 mb-3" to={"/"}>
+      <div className="container flex items-center justify-between mx-auto">
+        <Link className="block w-12 h-12 mb-3 md:w-16 md:h-16" to={"/"}>
           <img src={Logo} alt="LOGo" />
         </Link>
-        <div className="hidden xl:flex justify-center gap-x-5 grow">
+        <div className="justify-center hidden xl:flex gap-x-5 grow">
           <Link to={"/admin"}>
             <span className="flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer">
               داشبورد
@@ -44,10 +44,17 @@ const Header = () => {
             <span className="flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer">
               دانشجو
             </span>
-          </Link>{" "}
+          </Link>
+          <Link to={"/admin/dissertation"}>
+            <span className="flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer">
+              پایان نامه
+            </span>
+          </Link>
+          <Link to={"/admin/supervisor"}>
           <span className="flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer">
-            استاد راهتما
+            استاد راهنما
           </span>
+          </Link>
           <span className="flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer">
             کارشناس امور پایان نامه
           </span>
@@ -58,7 +65,7 @@ const Header = () => {
         <div className="flex justify-left items-center gap-x-7 xl:gap-x-10 py-3 text-[#52575C]">
           <button
             onClick={toggleNavbarStatusHandler}
-            className="block xl:hidden  rounded-lg"
+            className="block rounded-lg xl:hidden"
           >
             <Hamburger />
           </button>
@@ -73,7 +80,7 @@ const Header = () => {
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="w-9/12 sm:w-7/12 md:w-5/12 h-full bg-white"
+            className="w-9/12 h-full bg-white sm:w-7/12 md:w-5/12"
           >
             <div className="w-full flex flex-col items-center gap-y-5 p-5 sm:p-10 text-[#52575C]">
               <button onClick={toggleNavbarStatusHandler} className="self-end">
@@ -86,7 +93,7 @@ const Header = () => {
                   >
                     <img src={Logo} alt="mahak" />
                   </Link> */}
-              <div className="self-start flex flex-col items-start gap-y-10 my-10">
+              <div className="flex flex-col items-start self-start my-10 gap-y-10">
                 <Link to={"/admin"}>
                   <span className="flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer">
                     داشبورد
@@ -97,9 +104,16 @@ const Header = () => {
                     دانشجو
                   </span>
                 </Link>{" "}
+                <Link to={"/admin/dissertation"}>
+                  <span className="flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer">
+                    پایان نامه
+                  </span>
+                </Link>
+                <Link to={"/admin/supervisor"}>
                 <span className="flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer">
                   استاد راهنما
                 </span>
+                </Link>
                 <span className="flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer">
                   کارشناس امور پایان نامه
                 </span>

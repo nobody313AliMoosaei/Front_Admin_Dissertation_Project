@@ -8,7 +8,8 @@ import "./App.css";
 import Layout from "./components/common/layout";
 import Auth from "./pages/auth";
 import Student from "./pages/student";
-import Supervisor from "./pages/supervisor";
+import Dissertation from "./pages/dissertation";
+import Supervisor from "./pages/supervisor"
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<Auth />} />
         <Route path="admin" element={<Layout />}>
           <Route path="student" element={<Student />} />
+          <Route path="dissertation" element={<Dissertation />} />
           <Route path="supervisor" element={<Supervisor />} />
         </Route>
       </Routes>
