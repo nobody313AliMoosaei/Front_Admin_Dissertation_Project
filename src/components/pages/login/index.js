@@ -11,7 +11,7 @@ const Login = () => {
         </div>
         <div className="mt-8">
           <div className="flex flex-col my-5">
-            <sapn className="sm:text-lg text-sm">نام کاربری</sapn>
+            <label className="sm:text-lg text-sm">نام کاربری</label>
             <input
               className="border-2 focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-12 h-10 p-1 sm:text-lg text-sm "
               placeholder="  نام کاربری خود را وارد کنید"
@@ -19,7 +19,7 @@ const Login = () => {
             />
           </div>
           <div className="flex flex-col my-5">
-            <sapn className="md:text-lg text-sm">رمز عبور</sapn>
+            <label className="md:text-lg text-sm">رمز عبور</label>
             <input
               className="border-2 border-[#9B9B9B] focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 rounded-md mt-1 sm:h-12 h-10 p-1 sm:text-lg text-sm "
               placeholder="رمزعبور خود را وارد کنید"

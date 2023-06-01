@@ -4,23 +4,22 @@ import { Link } from "react-router-dom";
 //SVG
 import { ReactComponent as Hamburger } from "./../../../../assets/svg/hamburger.svg";
 import { ReactComponent as CloseCircle } from "./../../../../assets/svg/closeCircle.svg";
+import { ReactComponent as Profile } from "./../../../../assets/svg//profile-circle2.svg";
 
 //PNG
 import Logo from "./../../../../assets/image/logo.png";
+import ModalExit from "../../modalExit";
 const Header = () => {
   const [isOpenNavbar, setIsOpenNavbar] = useState(false);
-  const [scrollPosition, setScrollPosition] = useState();
+  const [isOpenModalExit, setIsOpenModalExit] = useState(false);
+  const [params, setParams] = useState(window.location.pathname);
 
-  useEffect(() => {
-    window.addEventListener("scroll", listenToScroll);
-  }, []);
-
-  const listenToScroll = () => {
-    const winScroll =
-      document.body.scrollTop || document.documentElement.scrollTop;
-
-    setScrollPosition(winScroll);
+  const changeBackground = () => {
+    setParams(window.location.pathname);
   };
+  useEffect(() => {
+    window.addEventListener("click", changeBackground);
+  }, []);
 
   const toggleNavbarStatusHandler = () => {
     setIsOpenNavbar(!isOpenNavbar);
@@ -28,32 +27,59 @@ const Header = () => {
 
   return (
     <div
-      className={`w-full rounded-none px-5 py-1 bg-white shadow-[0_2px_7px_0px_rgba(6,23,48,0.1)]`}
+      className={`w-full rounded-none px-5 bg-white shadow-[0_2px_7px_0px_rgba(6,23,48,0.1)]`}
     >
       <div className="flex justify-between items-center container mx-auto">
-        <Link className="block w-12 h-12 md:w-16 md:h-16 mb-3" to={"/"}>
+        <Link className="block w-10 h-10 md:w-16 md:h-16 mb-3" to={""}>
           <img src={Logo} alt="LOGo" />
         </Link>
         <div className="hidden xl:flex justify-center gap-x-5 grow">
           <Link to={"/admin"}>
-            <span className="flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer">
+            <span
+              className={`flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer ${
+                params === "/admin" ? "border-b-2 border-[#003B7E]" : ""
+              }`}
+            >
               داشبورد
             </span>
           </Link>
           <Link to={"/admin/student"}>
-            <span className="flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer">
+            <span
+              className={`flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer ${
+                params === "/admin/student" ? "border-b-2 border-[#003B7E]" : ""
+              }`}
+            >
               دانشجو
             </span>
           </Link>{" "}
-          <span className="flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer">
-            استاد راهتما
+          <span
+            className={`flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer ${
+              params === "/admin/supervisor"
+                ? "border-b-2 border-[#003B7E]"
+                : ""
+            }`}
+          >
+            استاد راهنما
           </span>
-          <span className="flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer">
+          <span
+            className={`flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer`}
+          >
             کارشناس امور پایان نامه
           </span>
-          <span className="flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer">
+          <span
+            className={`flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer`}
+          >
             کارشناس تحصیلات تکمیلی
           </span>
+          <Link to={"news"}>
+            <span
+              className={`flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer ${
+                params === "/admin/news" ? "border-b-2 border-[#003B7E]" : ""
+              }`}
+            >
+              اخبار
+            </span>
+          </Link>
         </div>
         <div className="flex justify-left items-center gap-x-7 xl:gap-x-10 py-3 text-[#52575C]">
           <button
@@ -62,6 +88,18 @@ const Header = () => {
           >
             <Hamburger />
           </button>
+          <div className="group">
+            <Profile className="hidden xl:block w-10 h-10" />
+            <div className="group-hover:flex flex-col hidden  absolute bg-white py-3 px-5 left-4 gap-y-2 shadow-xl border-2 rounded-md">
+              <span className="hover:cursor-pointer">پروفایل</span>
+              <span
+                onClick={() => setIsOpenModalExit(true)}
+                className="hover:cursor-pointer"
+              >
+                خروج
+              </span>
+            </div>
+          </div>
         </div>
 
         {/* mobile view Navbar */}
@@ -88,29 +126,62 @@ const Header = () => {
                   </Link> */}
               <div className="self-start flex flex-col items-start gap-y-10 my-10">
                 <Link to={"/admin"}>
-                  <span className="flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer">
+                  <span
+                    className={`flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer`}
+                  >
                     داشبورد
                   </span>
                 </Link>
                 <Link to={"/admin/student"}>
-                  <span className="flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer">
+                  <span
+                    className={`flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer`}
+                  >
                     دانشجو
                   </span>
                 </Link>{" "}
-                <span className="flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer">
+                <span
+                  className={`flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer`}
+                >
                   استاد راهنما
                 </span>
-                <span className="flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer">
+                <span
+                  className={`flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer`}
+                >
                   کارشناس امور پایان نامه
                 </span>
-                <span className="flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer">
+                <span
+                  className={`flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer`}
+                >
                   کارشناس تحصیلات تکمیلی
+                </span>
+                <Link to={"news"}>
+                  <span
+                    className={`flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer`}
+                  >
+                    اخبار
+                  </span>
+                </Link>
+                <span
+                  className={`flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer`}
+                >
+                  پروفایل
+                </span>
+                <span
+                  onClick={() => setIsOpenModalExit(true)}
+                  className={`flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer`}
+                >
+                  خروج
                 </span>
               </div>
             </div>
           </div>
         </div>
       </div>
+      {isOpenModalExit ? (
+        <ModalExit closeOpenModalExit={() => setIsOpenModalExit(false)} />
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
