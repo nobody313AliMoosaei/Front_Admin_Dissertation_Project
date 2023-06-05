@@ -15,6 +15,7 @@ import Auth from "./pages/auth";
 import Dashboard from "./pages/dashboard";
 import News from "./pages/news";
 import Student from "./pages/student";
+import Dissertation from "./pages/dissertation";
 import Supervisor from "./pages/supervisor";
 import DissertationExpert from "./pages/dissertationExpert";
 import GraduateExpert from "./pages/graduateExpert";
@@ -28,6 +29,7 @@ function App() {
           <Route path="/admin" element={<Dashboard />} />
           {/* student Route */}
           <Route path="student" element={<Student />} />
+          <Route path="dissertation" element={<Dissertation />} />
           <Route path="student/add" element={<AddStudent />} />
           <Route path="student/delete" element={<DeleteStudent />} />
           <Route path="student/edit/:id" element={<EditStudent />} />
