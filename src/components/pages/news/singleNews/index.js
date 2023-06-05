@@ -8,11 +8,11 @@ const SingleNews = ({ singleNews, index, id, page }) => {
   const [isShowDeleteModal, setIsShowDeleteModal] = useState(false);
   return (
     <>
-      <div className="grid grid-cols-12 w-full border-b-2  border-[#CBCBCB] text-center justify-items-center bg-white p-2 items-center  my-2 font-medium text-[#74787C]">
+      <div className="grid grid-cols-12 w-full border-b-2 border-[#CBCBCB] text-center justify-items-center bg-white p-2 items-center  my-2 font-medium text-[#74787C]">
         <span className="col-span-1">{index + 1}</span>
         <img
           className="col-span-2 bg-slate-500 w-3/4 h-14 rounded-md "
-          src=""
+          src={singleNews.src}
         />
         <span className="col-span-2 truncate">{singleNews.title}</span>
         <span className="col-span-4 truncate">{singleNews.text}</span>

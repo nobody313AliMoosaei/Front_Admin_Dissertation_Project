@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 
 //SVG
 import { ReactComponent as Search } from "../../assets/svg/search-normal.svg";
-import Pagination from "../../components/common/pagination";
+import NewsImage from "../../assets/image/news.png";
 //Components
+import Pagination from "../../components/common/pagination";
 import TableHeader from "../../components/common/tableHeader";
 import SingleNews from "../../components/pages/news/singleNews";
 
@@ -13,7 +14,7 @@ const News = () => {
     {
       id: 1,
       title: " تمدید مدت تحویل پروژه",
-      src: "",
+      src: NewsImage,
       text: "تحویل پروژه به مدت یک هفته تمدید شد.",
     },
     {

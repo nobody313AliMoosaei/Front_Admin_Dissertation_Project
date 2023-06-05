@@ -61,16 +61,28 @@ const Header = () => {
           >
             استاد راهنما
           </span>
-          <span
-            className={`flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer`}
-          >
-            کارشناس امور پایان نامه
-          </span>
-          <span
-            className={`flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer`}
-          >
-            کارشناس تحصیلات تکمیلی
-          </span>
+          <Link to={"dissertationexpert"}>
+            <span
+              className={`flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer ${
+                params === "/admin/dissertationexpert"
+                  ? "border-b-2 border-[#003B7E]"
+                  : ""
+              }`}
+            >
+              کارشناس امور پایان نامه
+            </span>
+          </Link>
+          <Link to={"graduateexpert"}>
+            <span
+              className={`flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer ${
+                params === "/admin/graduateexpert"
+                  ? "border-b-2 border-[#003B7E]"
+                  : ""
+              }`}
+            >
+              کارشناس تحصیلات تکمیلی
+            </span>
+          </Link>
           <Link to={"news"}>
             <span
               className={`flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer ${

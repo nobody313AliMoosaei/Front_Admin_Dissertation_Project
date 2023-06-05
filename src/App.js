@@ -16,6 +16,8 @@ import Dashboard from "./pages/dashboard";
 import News from "./pages/news";
 import Student from "./pages/student";
 import Supervisor from "./pages/supervisor";
+import DissertationExpert from "./pages/dissertationExpert";
+import GraduateExpert from "./pages/graduateExpert";
 
 function App() {
   return (
@@ -35,6 +37,10 @@ function App() {
           <Route path="news/edit/:id" element={<EditNews />} />
           {/* supervisor Route  */}
           <Route path="supervisor" element={<Supervisor />} />
+          {/* DissertationExpert */}
+          <Route path="dissertationexpert" element={<DissertationExpert />} />
+          {/* graduate expert */}
+          <Route path="graduateexpert" element={<GraduateExpert />} />
         </Route>
       </Routes>
     </BrowserRouter>

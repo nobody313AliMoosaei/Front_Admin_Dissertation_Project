@@ -59,7 +59,7 @@ const AddNews = () => {
           )}
 
           {imageNews ? (
-            <div className="flex justify-between items-center p-3 gap-6 w-full h-32 border-2 border-gray-300 bg-[#F9F9F9] rounded-lg cursor-pointer">
+            <div className="flex justify-between items-center py-3 px-6 gap-6 w-full h-32 border-2 border-gray-300 bg-[#F9F9F9] rounded-lg cursor-pointer">
               <div className="flex items-center gap-10">
                 <img className="h-28 w-48 rounded-md" src={preview} />
                 <span>{imageNews.name}</span>
