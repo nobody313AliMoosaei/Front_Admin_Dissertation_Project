@@ -4,16 +4,17 @@ import { Outlet } from "react-router-dom";
 import Back_graduation from "./../../../assets/image/graduation.png";
 
 //components
+import Footer from "./footer";
 import Header from "./header";
 
 const Layout = () => {
   return (
-    <div className="flex flex-col relative ">
-      <div className="">
-        <Header />
+    <div className="flex flex-col relative min-h-screen bg-[#F6F7F9]">
+      <Header />
+      <div className="mb-20">
+        <Outlet />
       </div>
-      <Outlet />
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };
