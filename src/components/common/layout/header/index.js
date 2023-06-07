@@ -53,7 +53,13 @@ const Header = () => {
             </span>
           </Link>
           <Link to={"/admin/dissertation"}>
-            <span className="flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer">
+            <span
+              className={`flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer ${
+                params === "/admin/dissertation"
+                  ? "border-b-2 border-[#003B7E]"
+                  : ""
+              }`}
+            >
               پایان نامه
             </span>
           </Link>
@@ -168,21 +174,20 @@ const Header = () => {
                     استاد راهنما
                   </span>
                 </Link>
-                <span
-                  className={`flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer`}
-                >
-                  استاد راهنما
-                </span>
-                <span
-                  className={`flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer`}
-                >
-                  کارشناس امور پایان نامه
-                </span>
-                <span
-                  className={`flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer`}
-                >
-                  کارشناس تحصیلات تکمیلی
-                </span>
+                <Link to={"/admin/dissertationexpert"}>
+                  <span
+                    className={`flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer`}
+                  >
+                    کارشناس امور پایان نامه
+                  </span>
+                </Link>
+                <Link to={"/admin/graduateexpert"}>
+                  <span
+                    className={`flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer`}
+                  >
+                    کارشناس تحصیلات تکمیلی
+                  </span>
+                </Link>
                 <Link to={"news"}>
                   <span
                     className={`flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer`}

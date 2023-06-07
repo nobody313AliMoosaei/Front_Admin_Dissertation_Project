@@ -18,7 +18,7 @@ import Student from "./pages/student";
 import Dissertation from "./pages/dissertation";
 import Supervisor from "./pages/supervisor";
 import DissertationExpert from "./pages/dissertationExpert";
-import GraduateExpert from "./pages/graduateExpert";
+import GraduateExpert from "./pages/graduatexpert";
 
 function App() {
   return (

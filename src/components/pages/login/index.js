@@ -2,8 +2,8 @@ import { Outlet } from "react-router-dom";
 
 const Login = () => {
   return (
-    <div className="flex justify-center ">
-      <div className="bg-[#fff] sm:p-10 px-5 py-8 rounded-lg w-[30rem] mx-8">
+    <div className="flex justify-center items-center -mt-10 h-screen">
+      <div className="bg-[#fff] sm:p-10 px-5 py-8 h-fit rounded-lg w-[30rem] mx-8 shadow-2xl">
         <div className="flex justify-center">
           <span className="text-base font-bold text-center sm:text-2xl">
             ورود به پنل ادمین

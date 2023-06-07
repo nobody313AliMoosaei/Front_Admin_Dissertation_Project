@@ -22,7 +22,7 @@ const AddNews = () => {
 
   return (
     <div className="flex justify-center mt-10">
-      <div className="flex flex-col bg-white w-11/12 px-10 py-5 rounded-md gap-8 ">
+      <div className="flex flex-col bg-white w-11/12 sm:px-10 px-5 py-5 rounded-md gap-8 ">
         <Link to={"/admin/news"}>
           <button className="bg-[#EBF1FD] w-fit flex items-center gap-1 p-2 rounded-md text-[#2080F6]">
             <Back />
@@ -42,7 +42,7 @@ const AddNews = () => {
         <div>
           <span className="absolute -mt-3 mr-4 px-2 bg-white">توضیحات</span>
           <textarea
-            className="border-2 w-full min-h-[5rem] max-h-60 p-2 rounded-md"
+            className="border-2 w-full min-h-[5rem] sm:max-h-60 max-h-72 p-2 rounded-md"
             placeholder="توضیحات خبر جدید رو اینجا بنویس"
           />
         </div>
@@ -59,8 +59,8 @@ const AddNews = () => {
           )}
 
           {imageNews ? (
-            <div className="flex justify-between items-center py-3 px-6 gap-6 w-full h-32 border-2 border-gray-300 bg-[#F9F9F9] rounded-lg cursor-pointer">
-              <div className="flex items-center gap-10">
+            <div className="flex justify-between items-center flex-wrap py-3 px-6 gap-6 w-full sm:h-32 border-2 border-gray-300 bg-[#F9F9F9] rounded-lg cursor-pointer">
+              <div className="flex flex-col sm:flex-row items-center gap-x-10">
                 <img className="h-28 w-48 rounded-md" src={preview} />
                 <span>{imageNews.name}</span>
               </div>
