@@ -3,48 +3,59 @@ import { ReactComponent as Search } from "../../assets/svg/search-normal.svg";
 import { ReactComponent as Close } from "../../assets/svg/closeCircle.svg";
 import { ReactComponent as Setting } from "../../assets/svg/settings.svg";
 import { ReactComponent as Open } from "../../assets/svg/openbook.svg";
-import Declined from "./declined";
-import Accepted from "./accepted";
+import Tablelist from "./tablelist";
 
 const Dissertation = () => {
   const [page, setPage] = useState(1);
   return (
     <div className="flex justify-center text-base">
       <div className="flex flex-col justify-center w-10/12 gap-6 p-5">
-        <div className="flex items-start">
+        <div className="flex flex-row items-start justify-between">
+        <div className="flex pt-1 felx-col w-fit">
           {page === 2 ? (
-            <p>پایان نامه های تایید نشده</p>
+            <div className="flex flex-col gap-2 md:flex-row md:items-center">
+            <p className="text-xl font-bold">پایان نامه های تایید شده</p>
+            <span className="text-[#2080F6] bg-[#EBF1FD] py-1 px-4 rounded-full">
+              100<span>دانشجو</span>
+            </span>
+            </div>
           ) : (
-            <p>پایان نامه های تایید شده</p>
+            <div className="flex flex-col gap-2 md:flex-row md:items-center">
+            <p className="text-xl font-bold">پایان نامه های تایید نشده</p>
+            <span className="text-[#2080F6] bg-[#EBF1FD] py-1 px-4 rounded-full">
+              100<span>دانشجو</span>
+            </span>
+            </div>
           )}
         </div>
-        <div className="flex flex-row items-end self-end w-fit">
+        <div className="flex flex-col self-end w-fit md:flex-row md:items-center">
           <span
             onClick={() => setPage(1)}
-            className={`flex flex-row gap-1 px-4 cursor-pointer py-2  rounded-md flex-row-reverse ${
+            className={`flex gap-1 px-4 cursor-pointer py-2  rounded-md flex-row-reverse ${
               page === 1 ? "text-white bg-[#2286f8]" : ""
             }`}
           >
-            پایان نامه های تایید شده
+            پایان نامه های تایید نشده
             <Open />
           </span>
           <span
             onClick={() => setPage(2)}
-            className={`flex flex-row gap-1 px-4 cursor-pointer py-2  rounded-md flex-row-reverse ${
+            className={`flex gap-1 px-4 cursor-pointer py-2  rounded-md flex-row-reverse ${
               page === 2 ? "text-white bg-[#2286f8]" : ""
             }`}
           >
-            پایان نامه های رد شده
+            پایان نامه های تایید شده
             <Close />
           </span>
         </div>
-        <div className="container w-10/12 mx-auto">
-          <div className="flex flex-col items-start gap-5"> 
-              <span className="flex flex-row-reverse">
-                جستجو بر اساس :
-                <Setting />
-              </span>
-            <div className="flex flex-row items-center gap-5">
+        </div>
+        
+          <div className="flex flex-col items-start gap-5 ">
+            <span className="flex flex-row-reverse">
+              جستجو بر اساس :
+              <Setting />
+            </span>
+            <div className="flex flex-col items-center gap-5 sm:flex-row sm:items-center sm:gap-8">
               <div className="flex flex-col">
                 <span>عنوان</span>
                 <input
@@ -70,9 +81,9 @@ const Dissertation = () => {
                 <Search />
               </button>
             </div>
-          </div>
+          
         </div>
-        {page === 2 ? <Declined /> : <Accepted />}
+        {page === 2 ? <Tablelist typetab="dec"/> : <Tablelist typetab="acc"/>}
       </div>
     </div>
   );
