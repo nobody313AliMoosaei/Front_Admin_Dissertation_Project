@@ -33,7 +33,7 @@ const Dissertation = ({ check, typetab }) => {
           <span className="">نام</span>
           <span className="">نام خانوادگی</span>
           <span className="">شماره دانشجویی</span>
-          <span className="hidden sm:block ">عنوان</span>
+          <span className="">عنوان</span>
           <span className="">پایان نامه </span>
           <span className="">صورت جلسه </span>
         </div>
