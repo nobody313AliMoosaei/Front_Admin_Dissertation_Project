@@ -16,7 +16,10 @@ import Dashboard from "./pages/dashboard";
 import News from "./pages/news";
 import Student from "./pages/student";
 import Dissertation from "./pages/dissertation";
-import Supervisor from "./pages/supervisor"
+import Supervisor from "./pages/supervisor";
+import Deletesupervisor from "./components/pages/supervisor/deleteSupervisor"
+import EditSupervisor from "./components/pages/supervisor/editSupervisor";
+import AddSupervisor from "./components/pages/supervisor/addSupervisor";
 
 function App() {
   return (
@@ -37,6 +40,9 @@ function App() {
           <Route path="news/edit/:id" element={<EditNews />} />
           {/* supervisor Route  */}
           <Route path="supervisor" element={<Supervisor />} />
+          <Route path="supervisor/add" element={<AddSupervisor />} />
+          <Route path="supervisor/delete" element={<Deletesupervisor />} />
+          <Route path="supervisor/edit/:id" element={<EditSupervisor />} />
         </Route>
       </Routes>
     </BrowserRouter>
