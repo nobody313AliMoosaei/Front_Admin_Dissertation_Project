@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import DeleteSupervisorModal from "../deleteSupervisor";
 
 const SingleSuperviserCard = ({ singleSupervisor, index, lastIndex }) => {
+  console.log(singleSupervisor);
   const [isShowDeleteModal, setIsShowDeleteModal] = useState(false);
   return (
     <>
@@ -62,5 +63,5 @@ const SingleSuperviserCard = ({ singleSupervisor, index, lastIndex }) => {
     </>
   );
 };
- 
+
 export default SingleSuperviserCard;

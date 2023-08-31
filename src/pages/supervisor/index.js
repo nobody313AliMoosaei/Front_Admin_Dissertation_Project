@@ -42,7 +42,6 @@ const supervisors = [
     lname: "محجوب",
     supervisorNumber: "3981231095",
     collage: "کامپیوتر",
-    
   },
   {
     id: 2,
@@ -50,7 +49,6 @@ const supervisors = [
     lname: "موسایی",
     supervisorNumber: "3981231102",
     collage: "کامپیوتر",
-    
   },
   {
     id: 3,
@@ -58,7 +56,6 @@ const supervisors = [
     lname: "زاهد",
     supervisorNumber: "3981231061",
     collage: "کامپیوتر",
-    
   },
 ];
 
@@ -70,7 +67,7 @@ const Supervisor = () => {
           <SingleSupervisorCard
             key={index}
             index={index}
-            singlesupervisor={singlesupervisorr}
+            singleSupervisor={singlesupervisorr}
             lastIndex={supervisors.length - 1}
           />
         ))}
