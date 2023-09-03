@@ -22,16 +22,12 @@ const tableHeader = [
     style: "col-span-2",
   },
   {
-    title: "شماره دانشجویی",
+    title: "کد پرسنلی",
     style: "col-span-2",
   },
   {
     title: "دانشکده",
     style: "col-span-2",
-  },
-  {
-    title: "استاد راهنما",
-    style: "col-span-1",
   },
 ];
 
@@ -82,17 +78,17 @@ const Supervisor = () => {
 
   return (
     <div className="flex justify-center mt-10">
-      <div className="flex flex-col w-11/12 gap-6">
+      <div className="flex flex-col w-9/12 gap-6">
         <div className="flex flex-col justify-between gap-8 sm:flex-row sm:items-center">
           <div className="flex items-center gap-10">
-            <h2 className="text-xl font-semibold "> اطلاعات دانشجو</h2>
+            <h2 className="text-xl font-semibold "> اطلاعات استاد راهنما </h2>
             <span className="text-[#2080F6] bg-[#EBF1FD] py-1 px-4 rounded-full">
-              100<span>دانشجو</span>
+              100<span>استاد راهنما</span>
             </span>
           </div>
           <Link className="self-end" to={"add"}>
             <button className="bg-[#435bf1] duration-300 ease-in-out text-white px-5 py-2 rounded-md hover:bg-white hover:text-[#435bf1] border-2 border-[#435bf1]">
-              افزودن دانشجو
+              افزودن استاد راهنما
             </button>
           </Link>
         </div>
@@ -106,7 +102,7 @@ const Supervisor = () => {
             />
           </div>
           <div className="flex flex-col">
-            <span>شماره دانشجویی</span>
+            <span>کد پرسنلی</span>
             <input
               id="supervisorNumber"
               className="h-10 p-2 mb-3 bg-white border-2 rounded-md "

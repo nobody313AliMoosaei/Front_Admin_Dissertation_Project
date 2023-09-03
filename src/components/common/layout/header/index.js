@@ -54,7 +54,13 @@ const Header = () => {
             </span>
           </Link>
           <Link to={"/admin/dissertation"}>
-            <span className="flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer">
+          <span
+            className={`flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer ${
+              params === "/admin/dissertation"
+                ? "border-b-2 border-[#003B7E]"
+                : ""
+            }`}
+          >
               پایان نامه
             </span>
           </Link>

@@ -8,6 +8,8 @@ const student = {
   studentNumber: "3981231095",
   collage: "کامپیوتر",
   supervisor: "استاد صفخانی",
+  nationalcode: "2745554123",
+  email: "test@email.com",
   term: 7,
 };
 const collage = [
@@ -30,10 +32,10 @@ const collage = [
 ];
 const EditStudent = () => {
   return (
-    <div className="w-full flex justify-center pt-10">
-      <div className="flex flex-col gap-10 w-11/12">
+    <div className="flex justify-center w-full pt-10">
+      <div className="flex flex-col w-11/12 gap-10">
         <div className="flex flex-col-reverse gap-y-5">
-          <span className="font-bold text-xl">ویرایش دانشجو</span>
+          <span className="text-xl font-bold">ویرایش دانشجو</span>
           <Link to={"/admin/student"}>
             <button className="bg-[#EBF1FD] w-fit flex items-center gap-1 p-2 rounded-md text-[#2080F6]">
               <Back />
@@ -41,7 +43,7 @@ const EditStudent = () => {
             </button>
           </Link>
         </div>
-        <div className="grid md:grid-cols-2 grid-cols-1 gap-x-16 gap-y-3 w-11/12 sm:w-8/12 self-center  bg-white p-5 rounded-md shadow-xl">
+        <div className="grid self-center w-11/12 grid-cols-1 p-5 bg-white rounded-md shadow-xl md:grid-cols-2 gap-x-16 gap-y-3 sm:w-8/12">
           <div className="flex flex-col gap-1">
             <label className="font-medium">نام</label>
             <input
@@ -97,6 +99,22 @@ const EditStudent = () => {
               placeholder="شماره ترم را وارد کنید"
               className="border-2 h-10 rounded-md px-2 border-[#9B9B9B]"
               defaultValue={student.term || ""}
+            />
+          </div>
+          <div className="flex flex-col gap-1">
+            <label className="font-medium">ایمیل</label>
+            <input
+              placeholder="ایمیل را وارد کنید"
+              className="border-2 h-10 rounded-md px-2 border-[#9B9B9B]"
+              defaultValue={student.email || ""}
+            />
+          </div>
+          <div className="flex flex-col gap-1">
+            <label className="font-medium">کد ملی</label>
+            <input
+              placeholder="کد ملی را وارد کنید"
+              className="border-2 h-10 rounded-md px-2 border-[#9B9B9B]"
+              defaultValue={student.nationalcode || ""}
             />
           </div>
           <button className="md:col-span-2 w-fit justify-self-end mt-5 bg-[#2080F6] text-white p-2 rounded-md hover:bg-white hover:text-[#2080F6] border-2 border-[#2080F6] duration-300 ease-in-out">

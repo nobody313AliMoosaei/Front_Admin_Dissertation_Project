@@ -14,22 +14,22 @@ const SingleStudentCard = ({ singleStudent, index, lastIndex }) => {
         } text-center justify-items-center bg-white py-3 items-center  my-2 font-medium text-[#74787C]`}
       >
         <span className="col-span-1 text-center">{index + 1}</span>
-        <span className="col-span-1 truncate w-full">
+        <span className="w-full col-span-1 truncate">
           {singleStudent.fname}
         </span>
-        <span className="col-span-2 truncate w-full">
+        <span className="w-full col-span-2 truncate">
           {singleStudent.lname}
         </span>
-        <span className="col-span-2 truncate w-full">
+        <span className="w-full col-span-2 truncate">
           {singleStudent.studentNumber}
         </span>
-        <span className="col-span-2 truncate w-full">
+        <span className="w-full col-span-1 truncate">
           {singleStudent.collage}
         </span>
-        <span className="col-span-1 truncate w-full">
+        <span className="w-full col-span-2 truncate">
           {singleStudent.supervisor}
         </span>
-        <div className="col-span-3 flex items-center gap-2 justify-center flex-wrap">
+        <div className="flex flex-wrap items-center justify-center col-span-3 gap-2">
           <button
             onClick={() => setIsShowDeleteModal(true)}
             className="duration-200 px-4 py-2 hover:border-[#ED2E2E] hover:text-[#ED2E2E] text-[#717171] text-sm border-2 rounded-md "

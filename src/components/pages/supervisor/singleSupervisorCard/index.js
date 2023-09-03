@@ -10,11 +10,11 @@ const SingleSuperviserCard = ({ singleSupervisor, index, lastIndex }) => {
   return (
     <>
       <div
-        className={`grid grid-cols-12 gap-5 w-full ${
+        className={`grid grid-cols-11 w-full ${
           index !== lastIndex ? "border-b" : ""
         } text-center justify-items-center bg-white py-3 items-center  my-2 font-medium text-[#74787C]`}
       >
-        <span className="col-span-1 text-center">{index + 1}</span>
+        <span className="col-span-1 ">{index + 1}</span>
         <span className="w-full col-span-1 truncate">
           {singleSupervisor.fname}
         </span>
@@ -22,14 +22,12 @@ const SingleSuperviserCard = ({ singleSupervisor, index, lastIndex }) => {
           {singleSupervisor.lname}
         </span>
         <span className="w-full col-span-2 truncate">
-          {singleSupervisor.studentNumber}
+          {singleSupervisor.supervisorNumber}
         </span>
         <span className="w-full col-span-2 truncate">
           {singleSupervisor.collage}
         </span>
-        <span className="w-full col-span-1 truncate">
-          {singleSupervisor.supervisor}
-        </span>
+
         <div className="flex flex-wrap items-center justify-center col-span-3 gap-2">
           <button
             onClick={() => setIsShowDeleteModal(true)}

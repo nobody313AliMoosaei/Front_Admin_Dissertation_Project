@@ -26,11 +26,11 @@ const tableHeader = [
   },
   {
     title: "دانشکده",
-    style: "col-span-2",
+    style: "col-span-1",
   },
   {
     title: "استاد راهنما",
-    style: "col-span-1",
+    style: "col-span-2",
   },
 ];
 

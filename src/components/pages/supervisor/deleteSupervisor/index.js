@@ -9,7 +9,7 @@ const DeleteSupervisorModal = ({ id, name, isShowModal, closeModalHandler }) => 
     <ModalWrapper isShowedModal={isShowModal} onCloseModal={closeModalHandler}>
       <div className="flex flex-col items-center justify-center gap-7">
         <span className="text-xl font-medium text-[#353535]">
-          آیا از حذف دانشجو {name} مطمئن هستید؟
+          آیا از حذف استاد {name} مطمئن هستید؟
         </span>
 
         <div className="flex items-center justify-between w-full">
