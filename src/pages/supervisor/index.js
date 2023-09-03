@@ -4,7 +4,7 @@ import { useState } from "react";
 import { ReactComponent as Search } from "../../assets/svg/search-normal.svg";
 //Components
 import Pagination from "../../components/common/pagination";
-import TableHeader from "../../components/common/tableHeader";
+import TableHeadersupervisor from "../../components/common/tableHeadersupervisor";
 import SingleSupervisorCard from "../../components/pages/supervisor/singleSupervisorCard";
 
 //static data
@@ -119,13 +119,13 @@ const Supervisor = () => {
             </button>
           </div>
         </div>
-        <TableHeader
+        <TableHeadersupervisor
           // meta={meta}
           tableHeader={tableHeader}
           minSize="min-w-[900px]"
         >
           {generateTable()}
-        </TableHeader>
+        </TableHeadersupervisor>
       </div>
     </div>
   );
