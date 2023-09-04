@@ -6,7 +6,7 @@ import { ReactComponent as Search } from "../../assets/svg/search-normal.svg";
 import Pagination from "../../components/common/pagination";
 import TableHeadersupervisor from "../../components/common/tableHeadersupervisor";
 import SingleSupervisorCard from "../../components/pages/supervisor/singleSupervisorCard";
-
+import { ReactComponent as Setting } from "../../assets/svg/settings.svg";
 //static data
 const tableHeader = [
   {
@@ -92,32 +92,38 @@ const Supervisor = () => {
             </button>
           </Link>
         </div>
-        <div className="flex flex-col items-start sm:flex-row sm:items-center sm:gap-8">
-          <div className="flex flex-col">
-            <span>نام خانوادگی</span>
-            <input
-              id="title"
-              type={"text"}
-              className="h-10 p-2 mb-3 bg-white border-2 rounded-md "
-            />
-          </div>
-          <div className="flex flex-col">
-            <span>کد پرسنلی</span>
-            <input
-              id="supervisorNumber"
-              className="h-10 p-2 mb-3 bg-white border-2 rounded-md "
-              type={"text"}
-            />
-          </div>
-          <div>
-            <button
-              //   onClick={searchHandler}
-              className="bg-[#435bf1] flex flex-row-reverse h-10 justify-center items-center mt-3 px-6 gap-2 rounded-md text-white"
-            >
-              جستجو
-              <Search />
-            </button>
-          </div>
+        <div className="flex flex-col items-start gap-5 ">
+            <span className="flex flex-row-reverse">
+              جستجو بر اساس :
+              <Setting />
+            </span>
+            <div className="flex flex-col items-center gap-5 sm:flex-row sm:items-center sm:gap-8">
+              <div className="flex flex-col">
+                <span>نام خانوادگی</span>
+                <input
+                  id="title"
+                  type={"text"}
+                  className="w-40 h-10 p-2 mb-3 bg-white border-2 rounded-md"
+                />
+              </div>
+              <div className="flex flex-col">
+                <span>کد پرسنلی</span>
+                <input
+                  id="studentNumber"
+                  className="w-40 h-10 p-2 mb-3 bg-white border-2 rounded-md "
+                  type={"text"}
+                />
+              </div>
+
+              <button
+                //onClick=
+                className="bg-[#2080F6] flex flex-row-reverse h-10 justify-center items-center mt-3 px-6 gap-2 rounded-md text-white"
+              >
+                جستجو
+                <Search />
+              </button>
+            </div>
+          
         </div>
         <TableHeadersupervisor
           // meta={meta}
