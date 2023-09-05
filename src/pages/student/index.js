@@ -26,11 +26,11 @@ const tableHeader = [
   },
   {
     title: "دانشکده",
-    style: "col-span-2",
+    style: "col-span-1",
   },
   {
     title: "استاد راهنما",
-    style: "col-span-1",
+    style: "col-span-2",
   },
 ];
 
@@ -64,7 +64,7 @@ const students = [
 const Student = () => {
   const generateTable = () => {
     return students.length ? (
-      <div className="bg-white px-2 rounded-b-md">
+      <div className="px-2 bg-white rounded-b-md">
         {students.map((singleStudent, index) => (
           <SingleStudentCard
             key={index}
@@ -75,16 +75,16 @@ const Student = () => {
         ))}
       </div>
     ) : (
-      <span className="bg-orange-300 w-fit self-center p-5 rounded-md my-5">
+      <span className="self-center p-5 my-5 bg-orange-300 rounded-md w-fit">
         متاسفانه هیچ داده ای یافت نشد!
       </span>
     );
   };
 
   return (
-    <div className="mt-10 flex justify-center">
-      <div className="w-11/12 flex flex-col gap-6">
-        <div className="flex flex-col sm:flex-row gap-8 sm:items-center justify-between">
+    <div className="flex justify-center mt-10">
+      <div className="flex flex-col w-11/12 gap-6">
+        <div className="flex flex-col justify-between gap-8 sm:flex-row sm:items-center">
           <div className="flex items-center gap-10">
             <h2 className="text-xl font-semibold "> اطلاعات دانشجو</h2>
             <span className="text-[#2080F6] bg-[#EBF1FD] py-1 px-4 rounded-full">
@@ -97,20 +97,20 @@ const Student = () => {
             </button>
           </Link>
         </div>
-        <div className="flex sm:flex-row flex-col sm:items-center items-start sm:gap-8">
+        <div className="flex flex-col items-start sm:flex-row sm:items-center sm:gap-8">
           <div className="flex flex-col">
             <span>نام خانوادگی</span>
             <input
               id="title"
               type={"text"}
-              className="border-2 p-2 bg-white rounded-md h-10 mb-3 "
+              className="h-10 p-2 mb-3 bg-white border-2 rounded-md "
             />
           </div>
           <div className="flex flex-col">
             <span>شماره دانشجویی</span>
             <input
               id="studentNumber"
-              className="border-2 p-2 bg-white rounded-md h-10 mb-3 "
+              className="h-10 p-2 mb-3 bg-white border-2 rounded-md "
               type={"text"}
             />
           </div>

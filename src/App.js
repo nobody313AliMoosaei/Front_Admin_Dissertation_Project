@@ -19,6 +19,9 @@ import Dissertation from "./pages/dissertation";
 import Supervisor from "./pages/supervisor";
 import DissertationExpert from "./pages/dissertationExpert";
 import GraduateExpert from "./pages/graduatexpert";
+import Deletesupervisor from "./components/pages/supervisor/deleteSupervisor"
+import EditSupervisor from "./components/pages/supervisor/editSupervisor";
+import AddSupervisor from "./components/pages/supervisor/addSupervisor";
 
 function App() {
   return (
@@ -43,6 +46,9 @@ function App() {
           <Route path="dissertationexpert" element={<DissertationExpert />} />
           {/* graduate expert */}
           <Route path="graduateexpert" element={<GraduateExpert />} />
+          <Route path="supervisor/add" element={<AddSupervisor />} />
+          <Route path="supervisor/delete" element={<Deletesupervisor />} />
+          <Route path="supervisor/edit/:id" element={<EditSupervisor />} />
         </Route>
       </Routes>
     </BrowserRouter>

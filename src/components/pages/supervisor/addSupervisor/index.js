@@ -2,16 +2,6 @@
 import { Link } from "react-router-dom";
 import { ReactComponent as Back } from "../../../../assets/svg/backward.svg";
 //static data
-const student = {
-  fname: "علی",
-  lname: "محجوب",
-  studentNumber: "3981231095",
-  collage: "کامپیوتر",
-  supervisor: "استاد صفخانی",
-  nationalcode: "2745554123",
-  email: "test@email.com",
-  term: 7,
-};
 const collage = [
   {
     label: "کامپیوتر",
@@ -30,13 +20,14 @@ const collage = [
     value: "عمران",
   },
 ];
-const EditStudent = () => {
+
+const AddSupervisor = () => {
   return (
     <div className="flex justify-center w-full pt-10">
       <div className="flex flex-col w-11/12 gap-10">
         <div className="flex flex-col-reverse gap-y-5">
-          <span className="text-xl font-bold">ویرایش دانشجو</span>
-          <Link to={"/admin/student"}>
+          <span className="text-xl font-bold">افزودن استاد راهنما</span>
+          <Link to={"/admin/supervisor"}>
             <button className="bg-[#EBF1FD] w-fit flex items-center gap-1 p-2 rounded-md text-[#2080F6]">
               <Back />
               بازگشت
@@ -49,7 +40,6 @@ const EditStudent = () => {
             <input
               placeholder="نام را وارد کنید"
               className="border-2 h-10 rounded-md px-2 border-[#9B9B9B]"
-              defaultValue={student.fname || ""}
             />
           </div>
           <div className="flex flex-col gap-1">
@@ -57,48 +47,36 @@ const EditStudent = () => {
             <input
               placeholder="نام خانوادگی را وارد کنید"
               className="border-2 h-10 rounded-md px-2 border-[#9B9B9B]"
-              defaultValue={student.lname || ""}
             />
           </div>
           <div className="flex flex-col gap-1">
             <label className="font-medium">دانشکده</label>
             <select
               name="College"
-              defaultValue={student.collage || ""}
               className="border-2 border-[#9B9B9B] rounded-md mt-1 h-10 p-1 sm:text-base text-sm "
             >
-              <option disabled selected defaultValue={""}>
+              <option disabled selected value="">
                 دانشکده مورد نظر خود را انتخاب کنید
               </option>
               {collage.map((option) => (
-                <option key={option.value} defaultValue={option.value}>
+                <option key={option.value} value={option.value}>
                   {option.label}
                 </option>
               ))}
             </select>
           </div>
           <div className="flex flex-col gap-1">
-            <label className="font-medium">استاد راهنما</label>
+            <label className="font-medium">کد ملی</label>
             <input
-              placeholder="استاد راهنما را وارد کنید"
+              placeholder="کد ملی را وارد کنید"
               className="border-2 h-10 rounded-md px-2 border-[#9B9B9B]"
-              defaultValue={student.supervisor || ""}
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label className="font-medium">شماره دانشجویی</label>
+            <label className="font-medium">کد پرسنلی</label>
             <input
-              placeholder="شماره دانشجویی را وارد کنید"
+              placeholder="کد پرسنلی را وارد کنید"
               className="border-2 h-10 rounded-md px-2 border-[#9B9B9B]"
-              defaultValue={student.studentNumber || ""}
-            />
-          </div>
-          <div className="flex flex-col gap-1">
-            <label className="font-medium">شماره ترم</label>
-            <input
-              placeholder="شماره ترم را وارد کنید"
-              className="border-2 h-10 rounded-md px-2 border-[#9B9B9B]"
-              defaultValue={student.term || ""}
             />
           </div>
           <div className="flex flex-col gap-1">
@@ -106,19 +84,10 @@ const EditStudent = () => {
             <input
               placeholder="ایمیل را وارد کنید"
               className="border-2 h-10 rounded-md px-2 border-[#9B9B9B]"
-              defaultValue={student.email || ""}
             />
           </div>
-          <div className="flex flex-col gap-1">
-            <label className="font-medium">کد ملی</label>
-            <input
-              placeholder="کد ملی را وارد کنید"
-              className="border-2 h-10 rounded-md px-2 border-[#9B9B9B]"
-              defaultValue={student.nationalcode || ""}
-            />
-          </div>
-          <button className="md:col-span-2 w-fit justify-self-end mt-5 bg-[#2080F6] text-white p-2 rounded-md hover:bg-white hover:text-[#2080F6] border-2 border-[#2080F6] duration-300 ease-in-out">
-            دخیره تغییرات
+          <button className="md:col-span-2 w-fit justify-self-end mt-5 bg-[#2080F6] text-white py-2 px-4 rounded-md hover:bg-white hover:text-[#2080F6] border-2 border-[#2080F6] duration-300 ease-in-out">
+            افزودن
           </button>
         </div>
       </div>
@@ -126,4 +95,4 @@ const EditStudent = () => {
   );
 };
 
-export default EditStudent;
+export default AddSupervisor;
