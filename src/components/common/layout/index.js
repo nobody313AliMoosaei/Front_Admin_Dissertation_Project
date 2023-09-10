@@ -11,7 +11,7 @@ const Layout = () => {
   return (
     <div className="flex flex-col relative min-h-screen bg-[#F6F7F9]">
       <Header />
-      <div className="mb-28">
+      <div className="mb-24">
         <Outlet />
       </div>
       <Footer />

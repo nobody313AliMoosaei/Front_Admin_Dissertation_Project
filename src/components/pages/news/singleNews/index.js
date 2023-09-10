@@ -14,8 +14,12 @@ const SingleNews = ({ singleNews, index, id, page }) => {
           className="col-span-2 border bg-slate-500 w-3/4 h-14 rounded-md "
           src={singleNews.src}
         />
-        <span className="col-span-2 truncate">{singleNews.title}</span>
-        <span className="col-span-4 truncate">{singleNews.text}</span>
+        <span className="col-span-2 max-w-full truncate">
+          {singleNews.title}
+        </span>
+        <span className="col-span-4 max-w-full truncate">
+          {singleNews.text}
+        </span>
         <div className="col-span-3 flex items-center gap-2 justify-around">
           <button
             onClick={() => setIsShowDeleteModal(true)}
@@ -28,11 +32,11 @@ const SingleNews = ({ singleNews, index, id, page }) => {
               ویرایش
             </button>
           </Link>
-          <Link to={""}>
-            <button className="px-2 py-1 text-[#717171] border-2 border-[#717171] rounded-md">
-              جزئیات
-            </button>
-          </Link>
+          {/* <Link to={""}>
+              <button className="px-2 py-1 text-[#717171] border-2 border-[#717171] rounded-md">
+                جزئیات
+              </button>
+            </Link> */}
         </div>
       </div>
       <div>

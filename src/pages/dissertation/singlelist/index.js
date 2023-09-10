@@ -1,39 +1,41 @@
 import { Link } from "react-router-dom";
 
 const SingleList = ({
-  id,
-  name,
-  family,
-  number,
-  title,
+  index,
+  singleThesis,
+  lastIndex,
   download_dissertation,
   download_sourat,
   type,
 }) => {
   return (
-    <div className="grid grid-cols-8 p-3 rounded-sm min-w-[900px]">
-      <span className="col-span-1">{id}</span>
-      <span className="">{name}</span>
-      <span className=""> {family}</span>
-      <span className="lg:col-span-1">{number}</span>
-      <span className="col-span-1 truncate ">{title}</span>
-      <button className="text-[#4c5053] w-fit px-2 py-1 rounded-sm">
+    <div
+      className={`grid grid-cols-12 gap-5 w-full ${
+        index !== lastIndex ? "border-b" : ""
+      } text-center justify-items-center bg-white py-3 items-center my-2 font-medium text-[#74787C]`}
+    >
+      <span className="col-span-1 ">{index + 1}</span>
+      <span className="col-span-1 w-full truncate">{singleThesis.name}</span>
+      <span className="col-span-1 w-full truncate"> {singleThesis.family}</span>
+      <span className="col-span-2 w-full truncate">{singleThesis.number}</span>
+      <span className="col-span-3 w-full truncate">{singleThesis.title}</span>
+      <button className="text-[#4c5053] w-fit px-2 py-1 rounded-sm col-span-1">
         دانلود
       </button>
       <button className="text-[#4c5053] w-fit px-2 py-1 rounded-sm col-span-1">
         دانلود
       </button>
-      <Link to={``}>
+      <div className="col-span-2" to={``}>
         {type === "acc" ? (
-          <button className="text-[#2080F6] bg-[#EBF1FD] w-fit justify-self-end px-2 py-1 rounded-sm col-span-1 sm:col-span-1">
+          <button className="duration-200 px-4 py-2 hover:border-[#6eed2e] hover:text-[#6eed2e] text-[#717171] text-sm border-2 rounded-md">
             تایید نهایی
           </button>
         ) : (
-          <button className="text-[#f62020] bg-[#fde2e2] w-fit justify-self-end px-2 py-1 rounded-sm col-span-1 sm:col-span-1">
+          <button className="duration-200 px-4 py-2 hover:border-[#ED2E2E] hover:text-[#ED2E2E] text-[#717171] text-sm border-2 rounded-md">
             رد ادمین
           </button>
         )}
-      </Link>
+      </div>
     </div>
   );
 };

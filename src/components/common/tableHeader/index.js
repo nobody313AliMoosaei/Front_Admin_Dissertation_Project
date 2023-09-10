@@ -3,7 +3,7 @@ import Pagination from "../pagination";
 export default function TableHeader({ minSize, tableHeader, children }) {
   return (
     <div className="w-full">
-      <div className="w-full mb-8 overflow-x-auto">
+      <div className="w-full mb-0 overflow-x-auto">
         <div className={`${minSize}`}>
           <table className="flex flex-col w-full">
             <thead className="text-lg font-semibold">

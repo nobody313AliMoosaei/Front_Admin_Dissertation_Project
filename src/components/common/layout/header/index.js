@@ -116,7 +116,9 @@ const Header = () => {
           <div className="group">
             <Profile className="hidden w-10 h-10 xl:block" />
             <div className="absolute flex-col hidden px-5 py-3 bg-white border-2 rounded-md shadow-xl group-hover:flex left-4 gap-y-2">
-              <span className="hover:cursor-pointer">پروفایل</span>
+              <Link to={"profile"} className="hover:cursor-pointer">
+                پروفایل
+              </Link>
               <span
                 onClick={() => setIsOpenModalExit(true)}
                 className="hover:cursor-pointer"

@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 //SVG
 import { ReactComponent as Search } from "../../assets/svg/search-normal.svg";
+import { ReactComponent as Setting } from "../../assets/svg/settings.svg";
 //Components
 import Pagination from "../../components/common/pagination";
 import TableHeader from "../../components/common/tableHeader";
-import SingleStudentCard from "../../components/pages/student/singleStudentCard";
+import SingleGraduateExpert from "../../components/pages/graduateExpert/singleGraduateExpert";
 
 //static data
 const tableHeader = [
@@ -21,66 +22,68 @@ const tableHeader = [
     style: "col-span-2",
   },
   {
-    title: "کد ملی",
+    title: "کد پرسنلی",
     style: "col-span-2",
   },
   {
-    title: "دانشکده",
+    title: "کد ملی",
     style: "col-span-2",
   },
 ];
 
-const students = [
+const graduateExpert = [
   {
     id: 1,
     fname: "علی",
     lname: "محجوب",
-    studentNumber: "3981231095",
-    collage: "کامپیوتر",
+    personaliCode: "88784521",
+    nationalCode: "5840062911",
   },
   {
     id: 2,
     fname: "علی",
     lname: "موسایی",
-    studentNumber: "3981231102",
-    collage: "کامپیوتر",
+    personaliCode: "88784521",
+    nationalCode: "4569876988",
   },
   {
     id: 3,
     fname: "میلاد",
     lname: "زاهد",
-    studentNumber: "3981231061",
-    collage: "کامپیوتر",
+    personaliCode: "88784521",
+    nationalCode: "1236544987",
   },
 ];
 
 const GraduateExpert = () => {
-  //   const generateTable = () => {
-  //     return students.length ? (
-  //       <div className="bg-white px-2 rounded-b-md">
-  //         {students.map((singleStudent, index) => (
-  //           <SingleStudentCard
-  //             key={index}
-  //             index={index}
-  //             singleStudent={singleStudent}
-  //             lastIndex={students.length - 1}
-  //           />
-  //         ))}
-  //         <Pagination count={students.length} />
-  //       </div>
-  //     ) : (
-  //       <span className="bg-orange-300 w-fit self-center p-5 rounded-md my-5">
-  //         متاسفانه هیچ داده ای یافت نشد!
-  //       </span>
-  //     );
-  //   };
+  const generateTable = () => {
+    return graduateExpert.length ? (
+      <div className="bg-white px-2 rounded-b-md">
+        {graduateExpert.map((singlegraduateExpert, index) => (
+          <SingleGraduateExpert
+            key={index}
+            index={index}
+            singlegraduateExpert={singlegraduateExpert}
+            lastIndex={graduateExpert.length - 1}
+          />
+        ))}
+      </div>
+    ) : (
+      <span className="bg-orange-300 w-fit self-center p-5 rounded-md my-5">
+        متاسفانه هیچ داده ای یافت نشد!
+      </span>
+    );
+  };
 
   return (
     <div className="mt-10 flex justify-center">
-      <div className="w-11/12 flex flex-col gap-6">
+      <div className="w-10/12 flex flex-col gap-6">
         <div className="flex flex-col sm:flex-row gap-8 sm:items-center justify-between">
           <div className="flex items-center gap-10">
-            <h2 className="text-xl font-semibold "> کارشناس تحصیلات تکمیلی</h2>
+            <h2 className="text-xl font-semibold ">
+              {" "}
+              اطلاعات کارشناس تحصیلات تکمیلی
+            </h2>
             <span className="text-[#2080F6] bg-[#EBF1FD] py-1 px-4 rounded-full">
               100<span className="px-1">کارشناس</span>
             </span>
@@ -91,31 +94,37 @@ const GraduateExpert = () => {
             </button>
           </Link>
         </div>
-        <div className="flex sm:flex-row flex-col sm:items-center items-start sm:gap-8">
-          <div className="flex flex-col">
-            <span>نام خانوادگی</span>
-            <input
-              id="title"
-              type={"text"}
-              className="border-2 p-2 bg-white rounded-md h-10 mb-3 "
-            />
-          </div>
-          <div className="flex flex-col">
-            <span>دانشکده</span>
-            <input
-              id="studentNumber"
-              className="border-2 p-2 bg-white rounded-md h-10 mb-3 "
-              type={"text"}
-            />
-          </div>
-          <div>
-            <button
-              //   onClick={searchHandler}
-              className="bg-[#435bf1] flex flex-row-reverse h-10 justify-center items-center mt-3 px-6 gap-2 rounded-md text-white"
-            >
-              جستجو
-              <Search />
-            </button>
+        <div className="flex flex-col items-start sm:gap-5">
+          <span className="flex flex-row-reverse">
+            جستجو بر اساس :
+            <Setting />
+          </span>
+          <div className="flex flex-col items-start sm:flex-row sm:items-center sm:gap-8 ">
+            <div className="flex flex-col ">
+              <span>نام خانوادگی</span>
+              <input
+                id="title"
+                type={"text"}
+                className="h-10 p-2 mb-3 bg-white border-2 rounded-md "
+              />
+            </div>
+            <div className="flex flex-col">
+              <span> کد ملی</span>
+              <input
+                id="studentNumber"
+                className="h-10 p-2 mb-3 bg-white border-2 rounded-md "
+                type={"text"}
+              />
+            </div>
+            <div>
+              <button
+                //   onClick={searchHandler}
+                className="bg-[#435bf1] flex flex-row-reverse h-10 justify-center items-center mt-3 px-6 gap-2 rounded-md text-white"
+              >
+                جستجو
+                <Search />
+              </button>
+            </div>
           </div>
         </div>
         <TableHeader
@@ -123,8 +132,13 @@ const GraduateExpert = () => {
           tableHeader={tableHeader}
           minSize="min-w-[900px]"
         >
-          {/* {generateTable()} */}
+          {generateTable()}
         </TableHeader>
+        {graduateExpert.length > 0 ? (
+          <Pagination count={graduateExpert.length} />
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );

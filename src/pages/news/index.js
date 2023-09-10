@@ -63,13 +63,13 @@ const News = () => {
   };
   return (
     <div className="flex justify-center">
-      <div className="flex flex-col gap-8 w-11/12">
+      <div className="flex flex-col gap-5 w-10/12">
         <Link className="self-end mt-10" to={"add"}>
           <button className="bg-[#435bf1] text-white w-fit self-end py-3 px-4 rounded-md">
             ایجاد خبر جدید
           </button>
         </Link>
-        <div className="bg-white p-4 rounded-md ">
+        <div className="bg-white p-4 rounded-md my-5">
           <div className="flex items-center w-full border-2 border-[#CBCBCB] rounded-md p-1 px-5">
             <input
               className="w-full h-10 focus:outline-none text-lg"
