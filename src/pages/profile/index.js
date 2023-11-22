@@ -9,8 +9,8 @@ const Profile = () => {
     {
       name: "علی",
       family: "محجوب",
-      personalityCode: "12365498",
-      nationalCode: "1235469844",
+      userName: "12365498",
+      password: "1235469844",
       Email: "ali@gamil.com",
     },
   ];
@@ -32,12 +32,12 @@ const Profile = () => {
               <span>{information[0].family}</span>
             </div>
             <div>
-              <span className="font-medium">کد ملی :</span>
-              <span>{information[0].nationalCode}</span>
+              <span className="font-medium">نام کاربری :</span>
+              <span>{information[0].password}</span>
             </div>
             <div>
-              <span className="font-medium">شماره پرسنلی :</span>
-              <span>{information[0].personalityCode}</span>
+              <span className="font-medium">رمز عبور :</span>
+              <span>{information[0].userName}</span>
             </div>
             <div>
               <span className="font-medium">ایمیل :</span>
@@ -88,11 +88,11 @@ const Profile = () => {
             </div>
             <div className="flex flex-col">
               <span className="sm:text-base self-start font-medium text-sm">
-                کدملی
+                نام کاربری
               </span>
               <input
                 required
-                value={information[0].nationalCode}
+                value={information[0].password}
                 className="border-2 focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-12 h-10 p-1 sm:text-base text-sm "
                 placeholder=" شماره دانشجویی خود را وارد کنید"
                 type={"text"}
@@ -100,11 +100,11 @@ const Profile = () => {
             </div>
             <div className="flex flex-col">
               <span className="sm:text-base self-start font-medium text-sm">
-                کد پرسنلی
+                رمز عبور
               </span>
               <input
                 required
-                value={information[0].personalityCode}
+                value={information[0].userName}
                 className="border-2 focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-12 h-10 p-1 sm:text-base text-sm "
                 placeholder=" شماره دانشجویی خود را وارد کنید"
                 type={"text"}
