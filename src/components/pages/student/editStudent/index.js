@@ -1,5 +1,5 @@
 //SVG
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { ReactComponent as Back } from "../../../../assets/svg/backward.svg";
 //static data
 const student = {
@@ -31,6 +31,8 @@ const collage = [
   },
 ];
 const EditStudent = () => {
+  const { id } = useParams();
+  console.log(id);
   return (
     <div className="flex justify-center w-full pt-10">
       <div className="flex flex-col w-11/12 gap-10">

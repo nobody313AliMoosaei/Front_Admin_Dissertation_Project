@@ -1,19 +1,12 @@
-export default function LoadingBtn({
-  onClickHandler,
-  isLoading,
-  btnClass,
-  children,
-}) {
-  return (
-    <button
-      onClick={onClickHandler}
-      className={`${btnClass} duration-200 font-medium px-7 py-2 rounded-md flex items-center justify-center`}
-    >
-      {isLoading ? (
+const LoadingBtn = ({ text, isLoading, action, className }) => {
+  if (isLoading) {
+    return (
+      <div className="group flex items-center justify-center gap-x-2 my-8 w-ful bg-gray-400 py-4 rounded-md text-white truncate cursor-default w-full">
+        لطفا صبر کنید
         <div role="status">
           <svg
             aria-hidden="true"
-            className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+            className="mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-white"
             viewBox="0 0 100 101"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -27,10 +20,19 @@ export default function LoadingBtn({
               fill="currentFill"
             />
           </svg>
-        </div>
-      ) : (
-        <span>{children}</span>
-      )}
-    </button>
-  );
-}
+        </div>{" "}
+      </div>
+    );
+  } else {
+    return (
+      <button
+        onClick={action}
+        className={`${className} my-8 py-4 px-10 rounded-md text-white`}
+      >
+        {text}
+      </button>
+    );
+  }
+};
+
+export default LoadingBtn;

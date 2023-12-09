@@ -4,8 +4,13 @@ import { ReactComponent as Search } from "../../assets/svg/search-normal.svg";
 import { ReactComponent as Setting } from "../../assets/svg/settings.svg";
 //Components
 import Pagination from "../../components/common/pagination";
+import Loding from "../../components/common/loding";
 import TableHeader from "../../components/common/tableHeader";
 import SingleStudentCard from "../../components/pages/student/singleStudentCard";
+import { FindUser, GetAllRoles, GetAllUser } from "../../services/student";
+import { useState } from "react";
+import { Cookies } from "react-cookie";
+import { useEffect } from "react";
 
 //static data
 const tableHeader = [
@@ -19,19 +24,23 @@ const tableHeader = [
   },
   {
     title: " نام خانوادگی",
-    style: "col-span-2",
+    style: "col-span-1",
   },
   {
-    title: "شماره دانشجویی",
+    title: "کدملی",
     style: "col-span-2",
   },
   {
     title: "دانشکده",
-    style: "col-span-1",
+    style: "col-span-2",
   },
   {
     title: "استاد راهنما",
     style: "col-span-2",
+  },
+  {
+    title: "غیر فعال",
+    style: "col-span-1",
   },
 ];
 
@@ -63,15 +72,67 @@ const students = [
 ];
 
 const Student = () => {
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const cookies = new Cookies();
+  const [token, setCookie] = useState(cookies.get("token"));
+  const [dataSearch, setDataSearch] = useState({});
+  const updateData = (e) => {
+    setDataSearch({
+      ...dataSearch,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  useEffect(() => {
+    asyncGetAllUser();
+  }, []);
+
+  const asyncGetAllUser = async () => {
+    setIsLoading(true);
+    try {
+      const response = await GetAllUser(token);
+      const response2 = await GetAllRoles(token);
+
+      //check repsonse status
+      if (response.status === 200) {
+        // console.log(response.data);
+        setData(response.data);
+      } else {
+        //error occure
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    setIsLoading(false);
+  };
+  const asyncFindUser = async () => {
+    setIsLoading(true);
+    try {
+      const response = await FindUser(token);
+
+      //check repsonse status
+      if (response.status === 200) {
+        // console.log(response.data);
+        setData(response.data);
+      } else {
+        //error occure
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    setIsLoading(false);
+  };
+
   const generateTable = () => {
-    return students.length ? (
+    return data.length ? (
       <div className="px-2 bg-white rounded-b-md">
-        {students.map((singleStudent, index) => (
+        {data.map((singleStudent, index) => (
           <SingleStudentCard
             key={index}
             index={index}
             singleStudent={singleStudent}
-            lastIndex={students.length - 1}
+            lastIndex={data.length - 1}
           />
         ))}
       </div>
@@ -110,6 +171,8 @@ const Student = () => {
                 id="title"
                 type={"text"}
                 className="h-10 p-2 mb-3 bg-white border-2 rounded-md "
+                name="name"
+                onChange={updateData}
               />
             </div>
             <div className="flex flex-col">
@@ -118,25 +181,33 @@ const Student = () => {
                 id="studentNumber"
                 className="h-10 p-2 mb-3 bg-white border-2 rounded-md "
                 type={"text"}
+                name="code"
+                onChange={updateData}
               />
             </div>
-            <div>
+            <div className="flex gap-x-10">
               <button
-                //   onClick={searchHandler}
+                onClick={asyncFindUser}
                 className="bg-[#435bf1] flex flex-row-reverse h-10 justify-center items-center mt-3 px-6 gap-2 rounded-md text-white"
               >
                 جستجو
                 <Search />
               </button>
+              {/* <button
+                onClick={asyncGetAllUser}
+                className="bg-[#435bf1] flex flex-row-reverse h-10 justify-center items-center mt-3 px-6 gap-2 rounded-md text-white"
+              >
+                نمایش همه
+              </button> */}
             </div>
           </div>
         </div>
         <TableHeader
           // meta={meta}
           tableHeader={tableHeader}
-          minSize="min-w-[900px]"
+          minSize="min-w-[1024px]"
         >
-          {generateTable()}
+          {isLoading ? <Loding /> : generateTable()}
         </TableHeader>
         {students.length > 0 ? <Pagination count={students.length} /> : <></>}
       </div>

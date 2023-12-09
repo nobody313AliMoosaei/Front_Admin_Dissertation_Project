@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import DeleteSupervisorModal from "../deleteSupervisor";
 
 const SingleSuperviserCard = ({ singleSupervisor, index, lastIndex }) => {
-  console.log(singleSupervisor);
   const [isShowDeleteModal, setIsShowDeleteModal] = useState(false);
   return (
     <>
@@ -15,17 +14,17 @@ const SingleSuperviserCard = ({ singleSupervisor, index, lastIndex }) => {
         } text-center justify-items-center bg-white py-3 items-center  my-2 font-medium text-[#74787C]`}
       >
         <span className="col-span-1 ">{index + 1}</span>
-        <span className="w-full col-span-1 truncate">
-          {singleSupervisor.fname}
+        <span className="w-full col-span-2 truncate">
+          {singleSupervisor.firstName}
         </span>
         <span className="w-full col-span-2 truncate">
-          {singleSupervisor.lname}
+          {singleSupervisor.lastName}
         </span>
         <span className="w-full col-span-2 truncate">
-          {singleSupervisor.supervisorNumber}
+          {singleSupervisor.nationalCode}
         </span>
         <span className="w-full col-span-2 truncate">
-          {singleSupervisor.collage}
+          {singleSupervisor.college}
         </span>
 
         <div className="flex flex-wrap items-center justify-center col-span-3 gap-2">

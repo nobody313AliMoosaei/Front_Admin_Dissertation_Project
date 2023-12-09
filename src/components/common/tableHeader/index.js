@@ -7,7 +7,7 @@ export default function TableHeader({ minSize, tableHeader, children }) {
         <div className={`${minSize}`}>
           <table className="flex flex-col w-full">
             <thead className="text-lg font-semibold">
-              <tr className="grid w-full grid-cols-12 p-4 bg-white border-b rounded-t-lg">
+              <tr className="grid w-full grid-cols-12 py-4 bg-white border-b rounded-t-lg">
                 {tableHeader.map((header, headerIndex) => (
                   <th key={headerIndex} className={`${header.style}`}>
                     {header.title}

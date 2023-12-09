@@ -8,6 +8,13 @@ import { ReactComponent as Open } from "../../assets/svg/openbook.svg";
 import TableHeader from "../../components/common/tableHeader";
 import SingleList from "./singlelist";
 import Pagination from "../../components/common/pagination";
+import {
+  DownloadDissertation,
+  GetAllDissertation,
+  GetCollegeUni,
+} from "../../services/dissertation";
+//Cookie
+import { Cookies } from "react-cookie";
 
 //static data
 const tableHeader = [
@@ -39,6 +46,10 @@ const tableHeader = [
     title: "صورت جلسه",
     style: "col-span-1",
   },
+  {
+    title: "تغییر وضعیت",
+    style: "col-span-2",
+  },
 ];
 
 const thesis = [
@@ -67,12 +78,57 @@ const thesis = [
 
 const Dissertation = () => {
   const [page, setPage] = useState(1);
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const cookies = new Cookies();
+  const [token, setCookie] = useState(cookies.get("token"));
+
+  useEffect(() => {
+    asyncGetAllDisertation();
+  }, []);
+
+  const asyncGetAllDisertation = async () => {
+    const pageSize = 5;
+    setIsLoading(true);
+    try {
+      const response = await GetAllDissertation(token, page, pageSize);
+      // const response = await GetCollegeUni(token);
+
+      //check repsonse status
+      if (response.status === 200) {
+        console.log(response);
+        setData(response.data);
+      } else {
+        //error occure
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    setIsLoading(false);
+  };
+  const asyncDownloadDissertation = async () => {
+    setIsLoading(true);
+    try {
+      const response = await DownloadDissertation(token);
+      // const response = await GetCollegeUni(token);
+
+      //check repsonse status
+      if (response.status === 200) {
+        console.log(response);
+      } else {
+        //error occure
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    setIsLoading(false);
+  };
 
   const generateTable = () => {
-    return thesis.length > 0 ? (
+    return data.length > 0 ? (
       <div className="px-2 bg-white rounded-b-md ">
-        {Array.isArray(thesis) &&
-          thesis.map((singleThesis, index) => (
+        {Array.isArray(data) &&
+          data.map((singleThesis, index) => (
             <SingleList
               key={index}
               index={index}
@@ -109,7 +165,7 @@ const Dissertation = () => {
               </div>
             )}
           </div>
-          <div className="flex flex-col self-end w-fit md:flex-row md:items-center">
+          {/* <div className="flex flex-col self-end w-fit md:flex-row md:items-center">
             <span
               onClick={() => setPage(1)}
               className={`flex gap-1 px-4 cursor-pointer py-2  rounded-md flex-row-reverse ${
@@ -128,7 +184,7 @@ const Dissertation = () => {
               پایان نامه های تایید شده
               <Close />
             </span>
-          </div>
+          </div> */}
         </div>
 
         <div className="flex flex-col items-start gap-5 my-3 ">
@@ -155,7 +211,7 @@ const Dissertation = () => {
             </div>
 
             <button
-              //onClick=
+              // onClick={asyncDownloadDissertation}
               className="bg-[#2080F6] flex flex-row-reverse h-10 justify-center items-center mt-3 px-6 gap-2 rounded-md text-white"
             >
               جستجو

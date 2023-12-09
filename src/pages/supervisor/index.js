@@ -7,6 +7,10 @@ import { ReactComponent as Setting } from "../../assets/svg/settings.svg";
 import Pagination from "../../components/common/pagination";
 import SingleSupervisorCard from "../../components/pages/supervisor/singleSupervisorCard";
 import TableHeader from "../../components/common/tableHeader";
+import { Cookies } from "react-cookie";
+import { useEffect } from "react";
+import { GetAllTeachers } from "../../services/supervisor";
+import Loding from "../../components/common/loding";
 //static data
 const tableHeader = [
   {
@@ -15,14 +19,14 @@ const tableHeader = [
   },
   {
     title: " نام",
-    style: "col-span-1",
+    style: "col-span-2",
   },
   {
     title: " نام خانوادگی",
     style: "col-span-2",
   },
   {
-    title: "کد پرسنلی",
+    title: "کدملی",
     style: "col-span-2",
   },
   {
@@ -56,15 +60,45 @@ const supervisors = [
 ];
 
 const Supervisor = () => {
+  const [page, setPage] = useState(1);
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const cookies = new Cookies();
+  const [token, setCookie] = useState(cookies.get("token"));
+
+  useEffect(() => {
+    asyncGetAllTeachers();
+  }, []);
+
+  const asyncGetAllTeachers = async () => {
+    const value = 1;
+    setIsLoading(true);
+    try {
+      // const response = await GetAllDissertation(token, page, pageSize);
+      const response = await GetAllTeachers(token, value);
+
+      //check repsonse status
+      if (response.status === 200) {
+        console.log(response);
+        setData(response.data);
+      } else {
+        //error occure
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    setIsLoading(false);
+  };
+
   const generateTable = () => {
-    return supervisors.length ? (
+    return data.length ? (
       <div className="px-2 bg-white rounded-b-md">
-        {supervisors.map((singlesupervisorr, index) => (
+        {data.map((singlesupervisorr, index) => (
           <SingleSupervisorCard
             key={index}
             index={index}
             singleSupervisor={singlesupervisorr}
-            lastIndex={supervisors.length - 1}
+            lastIndex={data.length - 1}
           />
         ))}
       </div>
@@ -128,7 +162,7 @@ const Supervisor = () => {
           tableHeader={tableHeader}
           minSize="min-w-[900px]"
         >
-          {generateTable()}
+          {isLoading ? <Loding /> : generateTable()}
         </TableHeader>
         {supervisors.length > 0 ? (
           <Pagination count={supervisors.length} />
