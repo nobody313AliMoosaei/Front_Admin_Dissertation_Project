@@ -9,8 +9,13 @@ import SingleSupervisorCard from "../../components/pages/supervisor/singleSuperv
 import TableHeader from "../../components/common/tableHeader";
 import { Cookies } from "react-cookie";
 import { useEffect } from "react";
-import { GetAllTeachers } from "../../services/supervisor";
+import {
+  GetAllTeachers,
+  GetCollegeUni,
+  GetTeachersByCollegeRef,
+} from "../../services/supervisor";
 import Loding from "../../components/common/loding";
+import { GetUserInRole } from "../../services/dissertationExpert";
 //static data
 const tableHeader = [
   {
@@ -32,6 +37,10 @@ const tableHeader = [
   {
     title: "دانشکده",
     style: "col-span-2",
+  },
+  {
+    title: "غیر فعال",
+    style: "col-span-1",
   },
 ];
 
@@ -62,20 +71,75 @@ const supervisors = [
 const Supervisor = () => {
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
+  const [college, setColleges] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [CollegeRef, setCollegeRef] = useState("");
   const cookies = new Cookies();
   const [token, setCookie] = useState(cookies.get("token"));
 
   useEffect(() => {
-    asyncGetAllTeachers();
+    // asyncGetAllTeachers();
+    asyncGetUserInRole();
+    asyncGetCollageList();
   }, []);
+  const asyncGetUserInRole = async () => {
+    setIsLoading(true);
+    try {
+      const response = await GetUserInRole(token, 3);
+      // const response = await GetCollegeUni(token);
 
+      //check repsonse status
+      if (response.status === 200) {
+        console.log(response);
+        setData(response.data);
+      } else {
+        //error occure
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    setIsLoading(false);
+  };
   const asyncGetAllTeachers = async () => {
     const value = 1;
     setIsLoading(true);
     try {
       // const response = await GetAllDissertation(token, page, pageSize);
       const response = await GetAllTeachers(token, value);
+
+      //check repsonse status
+      if (response.status === 200) {
+        console.log(response);
+        setData(response.data);
+      } else {
+        //error occure
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    setIsLoading(false);
+  };
+  const asyncGetCollageList = async () => {
+    setIsLoading(true);
+    try {
+      const response = await GetCollegeUni(token);
+
+      //check repsonse status
+      if (response.status === 200) {
+        setColleges([...response.data]);
+        // console.log(response);
+      } else {
+        //error occure
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    setIsLoading(false);
+  };
+  const asyncGetTeachersByCollegeRef = async () => {
+    setIsLoading(true);
+    try {
+      const response = await GetTeachersByCollegeRef(token, CollegeRef);
 
       //check repsonse status
       if (response.status === 200) {
@@ -131,25 +195,25 @@ const Supervisor = () => {
             <Setting />
           </span>
           <div className="flex flex-col items-center gap-5 sm:flex-row sm:items-center sm:gap-8">
-            <div className="flex flex-col">
-              <span>نام خانوادگی</span>
-              <input
-                id="title"
-                type={"text"}
-                className="w-40 h-10 p-2 mb-3 bg-white border-2 rounded-md"
-              />
+            <div className="flex flex-col gap-1">
+              <label className="font-medium">دانشکده</label>
+              <select
+                name="collegeRef"
+                onChange={(e) => setCollegeRef(e.target.value)}
+                className="border-2 border-[#9B9B9B] rounded-md mt-1 h-10 p-1 sm:text-base text-sm "
+              >
+                <option disabled selected value="">
+                  دانشکده مورد نظر خود را انتخاب کنید
+                </option>
+                {college.map((option, index) => (
+                  <option key={index} value={option.id}>
+                    {option.title}
+                  </option>
+                ))}
+              </select>
             </div>
-            <div className="flex flex-col">
-              <span>کد پرسنلی</span>
-              <input
-                id="studentNumber"
-                className="w-40 h-10 p-2 mb-3 bg-white border-2 rounded-md "
-                type={"text"}
-              />
-            </div>
-
             <button
-              //onClick=
+              onClick={asyncGetTeachersByCollegeRef}
               className="bg-[#2080F6] flex flex-row-reverse h-10 justify-center items-center mt-3 px-6 gap-2 rounded-md text-white"
             >
               جستجو
@@ -164,11 +228,11 @@ const Supervisor = () => {
         >
           {isLoading ? <Loding /> : generateTable()}
         </TableHeader>
-        {supervisors.length > 0 ? (
+        {/* {supervisors.length > 0 ? (
           <Pagination count={supervisors.length} />
         ) : (
           <></>
-        )}
+        )} */}
       </div>
     </div>
   );

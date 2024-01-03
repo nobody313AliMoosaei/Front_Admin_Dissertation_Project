@@ -1,4 +1,4 @@
-const Loding = ({ className }) => {
+const Loding = ({ className, className2 }) => {
   return (
     <div className={`flex ${className} justify-center items-center gap-3`}>
       <div
@@ -9,7 +9,10 @@ const Loding = ({ className }) => {
           Loading...
         </span>
       </div>
-      <span className="font-medium"> ... Loading please wait</span>
+      <span className={` ${className2} font-medium`}>
+        {" "}
+        ... Loading please wait
+      </span>
     </div>
   );
 };

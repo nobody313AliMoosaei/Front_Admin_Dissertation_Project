@@ -50,14 +50,14 @@ const SingleStudentCard = ({ singleStudent, index, lastIndex }) => {
           {singleStudent.collegeName}
         </span>
         <span className="w-full col-span-2 truncate">
-          {singleStudent.supervisor}
+          {singleStudent.teachersName[0]}
         </span>
         <div className="flex">
           <label class="inline-flex relative items-center mr-5 cursor-pointer">
             <input
               type="checkbox"
               className="sr-only peer"
-              checked={enabled}
+              checked={!singleStudent.active}
               readOnly
             />
             <div
@@ -77,7 +77,7 @@ const SingleStudentCard = ({ singleStudent, index, lastIndex }) => {
             حذف
           </button> */}
           <Link
-            to={`edit/id=${singleStudent.userId}`}
+            to={`edit/${singleStudent.userId}`}
             className="duration-200 px-4 py-2 hover:border-[#F4B740] hover:text-[#F4B740] text-[#717171] text-sm border-2 rounded-md"
           >
             ویرایش

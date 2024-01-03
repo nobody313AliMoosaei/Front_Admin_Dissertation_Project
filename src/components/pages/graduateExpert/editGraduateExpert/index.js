@@ -1,6 +1,10 @@
 //SVG
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { ReactComponent as Back } from "../../../../assets/svg/backward.svg";
+import { useState } from "react";
+import { Cookies } from "react-cookie";
+import { useEffect } from "react";
+import { GetUserById } from "../../../../services/dissertationExpert";
 //static data
 const dissertationexpert = {
   id: 1,
@@ -29,6 +33,41 @@ const collage = [
   },
 ];
 const EditGraduateExpert = () => {
+  const { id } = useParams();
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [college, setColleges] = useState([]);
+  const cookies = new Cookies();
+  const [token, setCookie] = useState(cookies.get("token"));
+
+  const updateData = (e) => {
+    setData({
+      ...data,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  useEffect(() => {
+    asyncGetUserById();
+  }, []);
+  const asyncGetUserById = async () => {
+    setIsLoading(true);
+    console.log(id);
+    try {
+      const response = await GetUserById(id);
+
+      //check repsonse status
+      if (response.status === 200) {
+        setData(response.data);
+        console.log(response);
+      } else {
+        //error occure
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    setIsLoading(false);
+  };
   return (
     <div className="flex justify-center w-full pt-10">
       <div className="flex flex-col w-11/12 gap-10">
@@ -49,7 +88,7 @@ const EditGraduateExpert = () => {
             <input
               placeholder="نام را وارد کنید"
               className="border-2 h-10 rounded-md px-2 border-[#9B9B9B]"
-              defaultValue={dissertationexpert.fname || ""}
+              defaultValue={data.firsName || ""}
             />
           </div>
           <div className="flex flex-col gap-1">
@@ -57,14 +96,14 @@ const EditGraduateExpert = () => {
             <input
               placeholder="نام خانوادگی را وارد کنید"
               className="border-2 h-10 rounded-md px-2 border-[#9B9B9B]"
-              defaultValue={dissertationexpert.lname || ""}
+              defaultValue={data.lastName || ""}
             />
           </div>
           {/* <div className="flex flex-col gap-1">
             <label className="font-medium">دانشکده</label>
             <select
               name="College"
-              defaultValue={dissertationexpert.collage || ""}
+              defaultValue={data.collage || ""}
               className="border-2 border-[#9B9B9B] rounded-md mt-1 h-10 p-1 sm:text-base text-sm "
             >
               <option disabled selected defaultValue={""}>
@@ -82,7 +121,7 @@ const EditGraduateExpert = () => {
             <input
               placeholder="کد پرسنلی را وارد کنید"
               className="border-2 h-10 rounded-md px-2 border-[#9B9B9B]"
-              defaultValue={dissertationexpert.personaliCode || ""}
+              defaultValue={data.userName || ""}
             />
           </div>
           <div className="flex flex-col gap-1">
@@ -90,7 +129,7 @@ const EditGraduateExpert = () => {
             <input
               placeholder="کد ملی را وارد کنید"
               className="border-2 h-10 rounded-md px-2 border-[#9B9B9B]"
-              defaultValue={dissertationexpert.nationalCode || ""}
+              defaultValue={data.nationalCode || ""}
             />
           </div>
           <div className="flex flex-col gap-1">
@@ -98,7 +137,7 @@ const EditGraduateExpert = () => {
             <input
               placeholder="ایمیل را وارد کنید"
               className="border-2 h-10 rounded-md px-2 border-[#9B9B9B]"
-              defaultValue={dissertationexpert.email || ""}
+              defaultValue={data.email || ""}
             />
           </div>
           <button className="md:col-span-2 w-fit justify-self-end mt-5 bg-[#2080F6] text-white p-2 rounded-md hover:bg-white hover:text-[#2080F6] border-2 border-[#2080F6] duration-300 ease-in-out">

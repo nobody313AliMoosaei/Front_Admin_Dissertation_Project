@@ -28,7 +28,7 @@ const Login = () => {
 
     const { userName, password } = dataLogin;
     axios
-      .post("http://doc-rajaee.ir/API/v1/login", {
+      .post("http://doc-rajaee.ir/API/v1/Login", {
         userName: userName,
         password: password,
       })
@@ -36,6 +36,7 @@ const Login = () => {
         console.log(response);
         if (response.status === 200) {
           setCookies("token", response.data.token);
+          setCookies("fullName", response.data.fullName);
           toast.success("با موفقیت وارد شدید");
           navigate(`/admin`);
         } else {
@@ -88,7 +89,7 @@ const Login = () => {
             />
           </div>
           <LoadingBtn
-            className={"bg-[#003B7E]"}
+            className={"bg-[#003B7E] w-full"}
             action={asyncPostUserData}
             isLoading={isLoading}
             text="ورود به سامانه"

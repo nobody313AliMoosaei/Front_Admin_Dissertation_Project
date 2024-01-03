@@ -7,10 +7,11 @@ import Pagination from "../../components/common/pagination";
 import Loding from "../../components/common/loding";
 import TableHeader from "../../components/common/tableHeader";
 import SingleStudentCard from "../../components/pages/student/singleStudentCard";
-import { FindUser, GetAllRoles, GetAllUser } from "../../services/student";
+import { GetAllRoles, GetAllUser } from "../../services/student";
 import { useState } from "react";
 import { Cookies } from "react-cookie";
 import { useEffect } from "react";
+import { GetReportSystemCount } from "../../services/dashboard";
 
 //static data
 const tableHeader = [
@@ -44,39 +45,19 @@ const tableHeader = [
   },
 ];
 
-const students = [
-  {
-    id: 1,
-    fname: "علی",
-    lname: "محجوب",
-    studentNumber: "3981231095",
-    collage: "کامپیوتر",
-    supervisor: "استاد صفخانی",
-  },
-  {
-    id: 2,
-    fname: "علی",
-    lname: "موسایی",
-    studentNumber: "3981231102",
-    collage: "کامپیوتر",
-    supervisor: "استاد صفخانی",
-  },
-  {
-    id: 3,
-    fname: "میلاد",
-    lname: "زاهد",
-    studentNumber: "3981231061",
-    collage: "کامپیوتر",
-    supervisor: "استاد صفخانی",
-  },
-];
-
 const Student = () => {
   const [data, setData] = useState([]);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [count, setCount] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [isFinish, setIsFinish] = useState(false);
   const cookies = new Cookies();
   const [token, setCookie] = useState(cookies.get("token"));
   const [dataSearch, setDataSearch] = useState({});
+  // const [fullName , setFullName] = useState("")
+  // const [userName , setUserName] = useState("")
+  // const [title , setTitle] = useState("")
+
   const updateData = (e) => {
     setDataSearch({
       ...dataSearch,
@@ -86,18 +67,18 @@ const Student = () => {
 
   useEffect(() => {
     asyncGetAllUser();
+    asyncGetReportSystemCount();
   }, []);
-
-  const asyncGetAllUser = async () => {
+  const asyncGetReportSystemCount = async () => {
     setIsLoading(true);
     try {
-      const response = await GetAllUser(token);
-      const response2 = await GetAllRoles(token);
+      const response = await GetReportSystemCount();
+      // const response = await GetCollegeUni(token);
 
       //check repsonse status
       if (response.status === 200) {
-        // console.log(response.data);
-        setData(response.data);
+        // console.log(response);
+        setCount(response.data.studentCount);
       } else {
         //error occure
       }
@@ -106,15 +87,27 @@ const Student = () => {
     }
     setIsLoading(false);
   };
-  const asyncFindUser = async () => {
+  const asyncGetAllUser = async (num = 1) => {
+    const { fullName, userName, title } = dataSearch;
     setIsLoading(true);
     try {
-      const response = await FindUser(token);
-
+      const response = await GetAllUser(
+        token,
+        num,
+        5,
+        fullName,
+        userName,
+        title
+      );
       //check repsonse status
       if (response.status === 200) {
         // console.log(response.data);
         setData(response.data);
+        if (response.data.length < 5) {
+          setIsFinish(true);
+        } else {
+          setIsFinish(false);
+        }
       } else {
         //error occure
       }
@@ -150,7 +143,8 @@ const Student = () => {
           <div className="flex items-center gap-10">
             <h2 className="text-xl font-semibold "> اطلاعات دانشجو</h2>
             <span className="text-[#2080F6] bg-[#EBF1FD] py-1 px-4 rounded-full">
-              100<span>دانشجو</span>
+              {count}
+              <span>دانشجو</span>
             </span>
           </div>
           <Link className="self-end" to={"add"}>
@@ -166,28 +160,26 @@ const Student = () => {
           </span>
           <div className="flex flex-col items-start sm:flex-row sm:items-center sm:gap-8 ">
             <div className="flex flex-col ">
-              <span>نام خانوادگی</span>
+              <span>نام و نام خانوادگی</span>
               <input
-                id="title"
+                name="fullName"
                 type={"text"}
                 className="h-10 p-2 mb-3 bg-white border-2 rounded-md "
-                name="name"
                 onChange={updateData}
               />
             </div>
             <div className="flex flex-col">
               <span>شماره دانشجویی</span>
               <input
-                id="studentNumber"
+                name="userName"
                 className="h-10 p-2 mb-3 bg-white border-2 rounded-md "
                 type={"text"}
-                name="code"
                 onChange={updateData}
               />
             </div>
             <div className="flex gap-x-10">
               <button
-                onClick={asyncFindUser}
+                onClick={asyncGetAllUser}
                 className="bg-[#435bf1] flex flex-row-reverse h-10 justify-center items-center mt-3 px-6 gap-2 rounded-md text-white"
               >
                 جستجو
@@ -209,7 +201,14 @@ const Student = () => {
         >
           {isLoading ? <Loding /> : generateTable()}
         </TableHeader>
-        {students.length > 0 ? <Pagination count={students.length} /> : <></>}
+        <Pagination
+          action={(num) => {
+            asyncGetAllUser(num);
+          }}
+          setPageNumber={setPageNumber}
+          pageNumber={pageNumber}
+          isFinish={isFinish}
+        />
       </div>
     </div>
   );

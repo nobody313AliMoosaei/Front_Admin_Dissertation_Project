@@ -1,6 +1,10 @@
 //SVG
 import { Link } from "react-router-dom";
 import { ReactComponent as Back } from "../../../../assets/svg/backward.svg";
+import { AddNewUser } from "../../../../services/dissertationExpert";
+import { useState } from "react";
+import { Cookies } from "react-cookie";
+import { useEffect } from "react";
 //static data
 const collage = [
   {
@@ -22,6 +26,36 @@ const collage = [
 ];
 
 const AddGraduateExpert = () => {
+  const [data, setData] = useState({});
+  const [colleges, setColleges] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const cookies = new Cookies();
+  const [token, setCookie] = useState(cookies.get("token"));
+
+  // send data for add New User
+  const asyncAddNewUser = async () => {
+    setIsLoading(true);
+    try {
+      const response = await AddNewUser(token, data, 6);
+
+      //check repsonse status
+      if (response.status === 200) {
+        console.log(response);
+      } else {
+        //error occure
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    setIsLoading(false);
+  };
+
+  const updateData = (e) => {
+    setData({
+      ...data,
+      [e.target.name]: e.target.value,
+    });
+  };
   return (
     <div className="flex justify-center w-full pt-10">
       <div className="flex flex-col w-11/12 gap-10">
@@ -40,6 +74,8 @@ const AddGraduateExpert = () => {
           <div className="flex flex-col gap-1">
             <label className="font-medium">نام</label>
             <input
+              name="firstName"
+              onChange={updateData}
               placeholder="نام را وارد کنید"
               className="border-2 h-10 rounded-md px-2 border-[#9B9B9B]"
             />
@@ -47,6 +83,8 @@ const AddGraduateExpert = () => {
           <div className="flex flex-col gap-1">
             <label className="font-medium">نام خانوادگی</label>
             <input
+              name="lastName"
+              onChange={updateData}
               placeholder="نام خانوادگی را وارد کنید"
               className="border-2 h-10 rounded-md px-2 border-[#9B9B9B]"
             />
@@ -70,6 +108,8 @@ const AddGraduateExpert = () => {
           <div className="flex flex-col gap-1">
             <label className="font-medium"> کدملی</label>
             <input
+              name="nationalCode"
+              onChange={updateData}
               placeholder="کدملی  را وارد کنید"
               className="border-2 h-10 rounded-md px-2 border-[#9B9B9B]"
             />
@@ -77,18 +117,25 @@ const AddGraduateExpert = () => {
           <div className="flex flex-col gap-1">
             <label className="font-medium"> کدپرسنلی</label>
             <input
+              name="userName"
+              onChange={updateData}
               placeholder=" کدپرسنلی را وارد کنید"
               className="border-2 h-10 rounded-md px-2 border-[#9B9B9B]"
             />
           </div>
-          <div className="flex flex-col gap-1">
+          {/* <div className="flex flex-col gap-1">
             <label className="font-medium">ایمیل</label>
             <input
+            name=""
+            onChange={updateData}
               placeholder="ایمیل را وارد کنید"
               className="border-2 h-10 rounded-md px-2 border-[#9B9B9B]"
             />
-          </div>
-          <button className="md:col-span-2 w-fit justify-self-end mt-5 bg-[#2080F6] text-white py-2 px-4 rounded-md hover:bg-white hover:text-[#2080F6] border-2 border-[#2080F6] duration-300 ease-in-out">
+          </div> */}
+          <button
+            onClick={asyncAddNewUser}
+            className="md:col-span-2 w-fit justify-self-end mt-5 bg-[#2080F6] text-white py-2 px-4 rounded-md hover:bg-white hover:text-[#2080F6] border-2 border-[#2080F6] duration-300 ease-in-out"
+          >
             افزودن
           </button>
         </div>

@@ -1,13 +1,9 @@
-import axiosInstance from "./../helper/axiosInatance";
+import axiosInstance from "./../helper/axiosInstance2";
 import { toast } from "react-toastify";
-import { Cookies } from "react-cookie";
 
 const AxiosInstance = (router = null) => {
   axiosInstance.interceptors.request.use(
     function (config) {
-      const cookies = new Cookies();
-      const token = cookies.get("token");
-      config.headers.Authorization = `Bearer ${token}`;
       return config;
     },
     function (error) {

@@ -96,7 +96,16 @@ const Header = () => {
               کارشناس تحصیلات تکمیلی
             </span>
           </Link>
-          <Link to={"news"}>
+          <Link to={"reporting"}>
+            <span
+              className={`flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer ${
+                params === "/admin/news" ? "border-b-2 border-[#003B7E]" : ""
+              }`}
+            >
+              گزارش گیری
+            </span>
+          </Link>
+          {/* <Link to={"news"}>
             <span
               className={`flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer ${
                 params === "/admin/news" ? "border-b-2 border-[#003B7E]" : ""
@@ -104,7 +113,7 @@ const Header = () => {
             >
               اخبار
             </span>
-          </Link>
+          </Link> */}
         </div>
         <div className="flex justify-left items-center gap-x-7 xl:gap-x-10 py-3 text-[#52575C]">
           <button
@@ -116,9 +125,9 @@ const Header = () => {
           <div className="group">
             <Profile className="hidden w-10 h-10 xl:block" />
             <div className="absolute flex-col hidden px-5 py-3 bg-white border-2 rounded-md shadow-xl group-hover:flex left-4 gap-y-2">
-              <Link to={"profile"} className="hover:cursor-pointer">
+              {/* <Link to={"profile"} className="hover:cursor-pointer">
                 پروفایل
-              </Link>
+              </Link> */}
               <span
                 onClick={() => setIsOpenModalExit(true)}
                 className="hover:cursor-pointer"
@@ -190,18 +199,25 @@ const Header = () => {
                     کارشناس تحصیلات تکمیلی
                   </span>
                 </Link>
-                <Link to={"news"}>
+                <Link to={"reporting"}>
+                  <span
+                    className={`flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer`}
+                  >
+                    گزارش گیری
+                  </span>
+                </Link>
+                {/* <Link to={"news"}>
                   <span
                     className={`flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer`}
                   >
                     اخبار
                   </span>
-                </Link>
-                <span
+                </Link> */}
+                {/* <span
                   className={`flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer`}
                 >
                   پروفایل
-                </span>
+                </span> */}
                 <span
                   onClick={() => setIsOpenModalExit(true)}
                   className={`flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer`}

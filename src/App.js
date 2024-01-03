@@ -27,6 +27,7 @@ import EditDissertationExpert from "./components/pages/dissertationExpert/editDi
 import AddGraduateExpert from "./components/pages/graduateExpert/addGraduateExpert";
 import EditGraduateExpert from "./components/pages/graduateExpert/editGraduateExpert";
 import Profile from "./pages/profile";
+import Reporting from "./pages/reporting";
 
 function App() {
   return (
@@ -68,6 +69,7 @@ function App() {
             path="graduateexpert/edit/:id"
             element={<EditGraduateExpert />}
           />
+          <Route path="reporting" element={<Reporting />} />
         </Route>
       </Routes>
     </BrowserRouter>

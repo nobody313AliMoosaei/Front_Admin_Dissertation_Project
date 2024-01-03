@@ -5,25 +5,6 @@ import { useEffect, useState } from "react";
 import { AddNewUser, GetCollegeUni } from "../../../../services/student";
 import { GetAllTeachers } from "../../../../services/supervisor";
 import { Cookies } from "react-cookie";
-//static data
-const collage = [
-  {
-    label: "کامپیوتر",
-    value: "کامپیوتر",
-  },
-  {
-    label: "برق",
-    value: "برق",
-  },
-  {
-    label: "معماری",
-    value: "معماری",
-  },
-  {
-    label: "عمران",
-    value: "عمران",
-  },
-];
 
 const AddStudent = () => {
   const [data, setData] = useState({});

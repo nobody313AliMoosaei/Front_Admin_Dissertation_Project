@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
+import { Cookies } from "react-cookie";
 const Footer = () => {
   const [dateState, setDateState] = useState(new Date());
+  const cookies = new Cookies();
+  const [fullName, setFullName] = useState(cookies.get("fullName"));
+
   useEffect(() => {
     setInterval(() => setDateState(new Date()), 1000);
   }, []);
@@ -22,7 +26,7 @@ const Footer = () => {
         <div className="">
           <p>
             کاربر عزیز{" "}
-            <span className="text-red-500 font-medium">علی محجوب</span> خوش
+            <span className="text-red-500 font-medium">{fullName}</span> خوش
             آمدید
           </p>
         </div>
