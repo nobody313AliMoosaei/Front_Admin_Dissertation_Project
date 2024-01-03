@@ -179,7 +179,7 @@ const Student = () => {
             </div>
             <div className="flex gap-x-10">
               <button
-                onClick={asyncGetAllUser}
+                onClick={() => asyncGetAllUser()}
                 className="bg-[#435bf1] flex flex-row-reverse h-10 justify-center items-center mt-3 px-6 gap-2 rounded-md text-white"
               >
                 جستجو

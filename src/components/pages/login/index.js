@@ -33,7 +33,7 @@ const Login = () => {
         password: password,
       })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         if (response.status === 200) {
           setCookies("token", response.data.token);
           setCookies("fullName", response.data.fullName);
@@ -42,12 +42,12 @@ const Login = () => {
         } else {
           //error occurre
           console.log("response : ", response);
-          toast.error("اطلاعات وارد شده صحیح نمی باشد");
         }
-
-        setIsLoading(false);
       })
       .catch((error) => {
+        toast.error(error.response.data.errors.message);
+        // console.log(error.response.data.errors.message);
+        setIsLoading(false);
         if (error.response) {
           console.log(error.response);
           console.log("server responded");
