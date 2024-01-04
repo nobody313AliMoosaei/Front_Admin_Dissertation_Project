@@ -1,5 +1,5 @@
 //SVG
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ReactComponent as Back } from "../../../../assets/svg/backward.svg";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -7,6 +7,7 @@ import { Cookies } from "react-cookie";
 import { AddNewTeacher, GetCollegeUni } from "../../../../services/supervisor";
 import { toast } from "react-toastify";
 import { AddNewUser } from "../../../../services/dissertationExpert";
+import Loding from "../../../common/loding";
 //static data
 // const collage = [
 //   {
@@ -31,6 +32,7 @@ const AddSupervisor = () => {
   const [data, setData] = useState({});
   const [colleges, setColleges] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
   const cookies = new Cookies();
   const [token, setCookie] = useState(cookies.get("token"));
 
@@ -64,22 +66,27 @@ const AddSupervisor = () => {
   };
 
   const asyncAddNewTeacher = async () => {
-    setIsLoading(true);
-    try {
-      const response = await AddNewUser(token, data, 3);
+    if (data.CollegeRef === undefined || data.CollegeRef === "") {
+      toast.error("اطلاعات کاربر ناقص است");
+    } else {
+      setIsLoading(true);
+      try {
+        const response = await AddNewUser(token, data, 3);
 
-      //check repsonse status
-      if (response.status === 200) {
-        console.log(response);
-        toast.success("استاد راهنما با موفقیت اضافه شد.");
-      } else {
-        //error occure
+        //check repsonse status
+        if (response.status === 200) {
+          console.log(response);
+          navigate(`/admin/supervisor`);
+          toast.success("استاد راهنما با موفقیت اضافه شد.");
+        } else {
+          //error occure
+          toast.error(response.data.message);
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      toast.error("استاد راهنما اضافه نشد.");
-      console.log(error);
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   return (
@@ -148,7 +155,7 @@ const AddSupervisor = () => {
               className="border-2 h-10 rounded-md px-2 border-[#9B9B9B]"
             />
           </div>
-          <div className="flex flex-col gap-1">
+          {/* <div className="flex flex-col gap-1">
             <label className="font-medium">ایمیل</label>
             <input
               name="Email"
@@ -156,12 +163,16 @@ const AddSupervisor = () => {
               placeholder="ایمیل را وارد کنید"
               className="border-2 h-10 rounded-md px-2 border-[#9B9B9B]"
             />
-          </div>
+          </div> */}
           <button
             onClick={asyncAddNewTeacher}
             className="md:col-span-2 w-fit justify-self-end mt-5 bg-[#2080F6] text-white py-2 px-4 rounded-md hover:bg-white hover:text-[#2080F6] border-2 border-[#2080F6] duration-300 ease-in-out"
           >
-            افزودن
+            {isLoading ? (
+              <Loding className2={"hidden"} className={"h-6 px-1"} />
+            ) : (
+              "افزودن"
+            )}
           </button>
         </div>
       </div>

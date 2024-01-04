@@ -1,11 +1,13 @@
 //SVG
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ReactComponent as Back } from "../../../../assets/svg/backward.svg";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Cookies } from "react-cookie";
 import { GetCollegeUni } from "../../../../services/student";
 import { AddNewUser } from "../../../../services/dissertationExpert";
+import Loding from "../../../common/loding";
+import { toast } from "react-toastify";
 //static data
 const collage = [
   {
@@ -30,6 +32,7 @@ const AddDissertationExpert = () => {
   const [data, setData] = useState({});
   const [colleges, setColleges] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
   const cookies = new Cookies();
   const [token, setCookie] = useState(cookies.get("token"));
 
@@ -64,8 +67,11 @@ const AddDissertationExpert = () => {
 
       //check repsonse status
       if (response.status === 200) {
+        toast.success("با موفقیت ثبت شد");
+        navigate(`/admin/dissertationexpert`);
         console.log(response);
       } else {
+        toast.success(response.data.message);
         //error occure
       }
     } catch (error) {
@@ -160,7 +166,11 @@ const AddDissertationExpert = () => {
             onClick={asyncAddNewUser}
             className="md:col-span-2 w-fit justify-self-end mt-5 bg-[#2080F6] text-white py-2 px-4 rounded-md hover:bg-white hover:text-[#2080F6] border-2 border-[#2080F6] duration-300 ease-in-out"
           >
-            افزودن
+            {isLoading ? (
+              <Loding className2={"hidden"} className={"h-6 px-1"} />
+            ) : (
+              "افزودن"
+            )}
           </button>
         </div>
       </div>

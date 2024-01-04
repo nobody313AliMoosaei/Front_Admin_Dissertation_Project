@@ -28,7 +28,6 @@ export async function AddNewUser(token, data, RoleRef) {
       userName: data.userName,
       collegeRef: Number(data.collegeRef),
       teacher1_Ref: data.Teacher_1,
-      phoneNumber: "123",
     },
     {
       headers: {

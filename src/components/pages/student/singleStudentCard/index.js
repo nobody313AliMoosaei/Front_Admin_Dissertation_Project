@@ -7,7 +7,13 @@ import { DeActiveUser } from "../../../../services/student";
 import { Cookies } from "react-cookie";
 import { toast } from "react-toastify";
 
-const SingleStudentCard = ({ singleStudent, index, lastIndex }) => {
+const SingleStudentCard = ({
+  singleStudent,
+  index,
+  lastIndex,
+  action,
+  pageNumber,
+}) => {
   const [enabled, setEnabled] = useState(false);
   const [isShowDeleteModal, setIsShowDeleteModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -24,6 +30,7 @@ const SingleStudentCard = ({ singleStudent, index, lastIndex }) => {
         // console.log(response.data);
         toast.success("تغییرات با موفقیت ثبت شد");
         setIsShowDeleteModal(false);
+        action(pageNumber);
       } else {
         //error occure
       }

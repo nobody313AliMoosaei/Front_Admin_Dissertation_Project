@@ -8,7 +8,12 @@ import { DeActiveUser } from "../../../../services/student";
 import DeleteStudentModal from "../../student/deleteStudent";
 import { toast } from "react-toastify";
 
-const SingleSuperviserCard = ({ singleSupervisor, index, lastIndex }) => {
+const SingleSuperviserCard = ({
+  singleSupervisor,
+  index,
+  lastIndex,
+  action,
+}) => {
   const [enabled, setEnabled] = useState(false);
   const [isShowDeleteModal, setIsShowDeleteModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -25,6 +30,7 @@ const SingleSuperviserCard = ({ singleSupervisor, index, lastIndex }) => {
         // console.log(response.data);
         toast.success("تغییرات با موفقیت ثبت شد.");
         setIsShowDeleteModal(false);
+        action();
       } else {
         //error occure
       }

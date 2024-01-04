@@ -161,9 +161,13 @@ const Dissertation = () => {
         {Array.isArray(data) &&
           data.map((singleThesis, index) => (
             <SingleList
+              action={(pageNumber) => {
+                asyncGetAllDisertation(pageNumber);
+              }}
               key={index}
               index={index}
               singleThesis={singleThesis}
+              pageNumber={pageNumber}
               // lastIndex={thesis.length - 1}
             />
           ))}

@@ -122,6 +122,10 @@ const Student = () => {
       <div className="px-2 bg-white rounded-b-md">
         {data.map((singleStudent, index) => (
           <SingleStudentCard
+            action={(num) => {
+              asyncGetAllUser(num);
+            }}
+            pageNumber={pageNumber}
             key={index}
             index={index}
             singleStudent={singleStudent}
@@ -208,6 +212,7 @@ const Student = () => {
           setPageNumber={setPageNumber}
           pageNumber={pageNumber}
           isFinish={isFinish}
+          count={count}
         />
       </div>
     </div>

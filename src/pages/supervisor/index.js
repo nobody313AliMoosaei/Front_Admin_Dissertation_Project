@@ -180,6 +180,9 @@ const Supervisor = () => {
       <div className="px-2 bg-white rounded-b-md">
         {data.map((singlesupervisorr, index) => (
           <SingleSupervisorCard
+            action={() => {
+              asyncGetUserInRole();
+            }}
             key={index}
             index={index}
             singleSupervisor={singlesupervisorr}

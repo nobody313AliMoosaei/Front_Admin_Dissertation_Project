@@ -5,6 +5,7 @@ const Pagination = ({
   pageNumber,
   isFinish,
   setIsFinish,
+  count,
 }) => {
   return (
     <div className="flex justify-around items-center ">

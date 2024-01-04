@@ -1,10 +1,12 @@
 //SVG
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ReactComponent as Back } from "../../../../assets/svg/backward.svg";
 import { AddNewUser } from "../../../../services/dissertationExpert";
 import { useState } from "react";
 import { Cookies } from "react-cookie";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
+import Loding from "../../../common/loding";
 //static data
 const collage = [
   {
@@ -30,6 +32,7 @@ const AddGraduateExpert = () => {
   const [colleges, setColleges] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const cookies = new Cookies();
+  const navigate = useNavigate();
   const [token, setCookie] = useState(cookies.get("token"));
 
   // send data for add New User
@@ -40,8 +43,11 @@ const AddGraduateExpert = () => {
 
       //check repsonse status
       if (response.status === 200) {
+        toast.success("با موفقیت اضافه شد");
+        navigate(`/admin/graduateexpert`);
         console.log(response);
       } else {
+        toast.error(response.data.message);
         //error occure
       }
     } catch (error) {
@@ -136,7 +142,11 @@ const AddGraduateExpert = () => {
             onClick={asyncAddNewUser}
             className="md:col-span-2 w-fit justify-self-end mt-5 bg-[#2080F6] text-white py-2 px-4 rounded-md hover:bg-white hover:text-[#2080F6] border-2 border-[#2080F6] duration-300 ease-in-out"
           >
-            افزودن
+            {isLoading ? (
+              <Loding className2={"hidden"} className={"h-6 px-1"} />
+            ) : (
+              "افزودن"
+            )}
           </button>
         </div>
       </div>

@@ -160,6 +160,9 @@ const DissertationExpert = () => {
       <div className="bg-white px-2 rounded-b-md">
         {data.map((singleDissertationExpert, index) => (
           <SingleDessertationExpert
+            action={() => {
+              asyncGetUserInRole();
+            }}
             key={index}
             index={index}
             singleDissertationExpert={singleDissertationExpert}

@@ -8,7 +8,12 @@ import { DeActiveUser } from "../../../../services/student";
 import DeleteStudentModal from "../../student/deleteStudent";
 import { toast } from "react-toastify";
 
-const SingleGraduateExpert = ({ singlegraduateExpert, index, lastIndex }) => {
+const SingleGraduateExpert = ({
+  singlegraduateExpert,
+  index,
+  lastIndex,
+  action,
+}) => {
   const [enabled, setEnabled] = useState(false);
   const [isShowDeleteModal, setIsShowDeleteModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -23,6 +28,7 @@ const SingleGraduateExpert = ({ singlegraduateExpert, index, lastIndex }) => {
       //check repsonse status
       if (response.status === 200) {
         setIsShowDeleteModal(false);
+        action();
         toast.success("تغییرات با موفقیت ثبت شد");
         // console.log(response.data);
       } else {

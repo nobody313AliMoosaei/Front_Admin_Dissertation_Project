@@ -1,10 +1,16 @@
 //SVG
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ReactComponent as Back } from "../../../../assets/svg/backward.svg";
 import { useEffect, useState } from "react";
-import { AddNewUser, GetCollegeUni } from "../../../../services/student";
+import {
+  AddNewUser,
+  GetCollegeUni,
+  GetTeachersByCollegeRef,
+} from "../../../../services/student";
 import { GetAllTeachers } from "../../../../services/supervisor";
 import { Cookies } from "react-cookie";
+import Loding from "../../../common/loding";
+import { toast } from "react-toastify";
 
 const AddStudent = () => {
   const [data, setData] = useState({});
@@ -12,15 +18,33 @@ const AddStudent = () => {
   const [colleges, setColleges] = useState([]);
   const [filterTeachers, setFilterTeachres] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
   const cookies = new Cookies();
   const [token, setCookie] = useState(cookies.get("token"));
 
   useEffect(() => {
     asyncGetCollageList();
-    asyncGetTeacherList();
+    // asyncGetTeacherList();
   }, []);
 
   //get techers
+  const asyncGetTeachersByCollegeRef = async (collegeRef) => {
+    setIsLoading(true);
+    try {
+      const response = await GetTeachersByCollegeRef(token, collegeRef);
+
+      //check repsonse status
+      if (response.status === 200) {
+        setFilterTeachres([...response.data]);
+        // console.log(response);
+      } else {
+        //error occure
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    setIsLoading(false);
+  };
   const asyncGetTeacherList = async () => {
     setIsLoading(true);
     try {
@@ -61,20 +85,34 @@ const AddStudent = () => {
 
   // send data for add New User
   const asyncAddNewUser = async () => {
-    setIsLoading(true);
-    try {
-      const response = await AddNewUser(token, data);
+    // console.log(data.firstName);
+    if (
+      data.Teacher_1 === undefined ||
+      data.CollegeRef === undefined ||
+      data.Teacher_1 === "" ||
+      data.CollegeRef === ""
+    ) {
+      toast.error("اطلاعات کاربر ناقص است");
+    } else {
+      setIsLoading(true);
+      try {
+        const response = await AddNewUser(token, data);
 
-      //check repsonse status
-      if (response.status === 200) {
-        console.log(response);
-      } else {
-        //error occure
+        //check repsonse status
+        if (response.status === 200) {
+          // console.log(response);
+          toast.success(" دانشجو با موفیقت اضافه شد.");
+          navigate(`/admin/student`);
+        } else {
+          //error occure
+          console.log(response);
+          toast.error(response.data.message);
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   const updateData = (e) => {
@@ -85,11 +123,12 @@ const AddStudent = () => {
   };
   const filterteachers = (e) => {
     console.log(e.target.value);
-    console.log(teachers[0].collegRef);
-    const result = teachers.filter(
-      (item) => Number(item.collegRef) === Number(e.target.value)
-    );
-    setFilterTeachres(result);
+    // console.log(teachers[0].collegRef);
+    // const result = teachers.filter(
+    //   (item) => Number(item.collegRef) === Number(e.target.value)
+    // );
+    // setFilterTeachres(result);
+    asyncGetTeachersByCollegeRef(e.target.value);
     updateData(e);
   };
   return (
@@ -97,7 +136,7 @@ const AddStudent = () => {
       <div className="flex flex-col w-11/12 gap-10">
         <div className="flex flex-col-reverse gap-y-5">
           <span className="text-xl font-bold">افزودن دانشجو</span>
-          <Link to={"/admin/student"}>
+          <Link className="w-fit" to={"/admin/student"}>
             <button className="bg-[#EBF1FD] w-fit flex items-center gap-1 p-2 rounded-md text-[#2080F6]">
               <Back />
               بازگشت
@@ -204,7 +243,11 @@ const AddStudent = () => {
             onClick={asyncAddNewUser}
             className="md:col-span-2 w-fit justify-self-end mt-5 bg-[#2080F6] text-white py-2 px-4 rounded-md hover:bg-white hover:text-[#2080F6] border-2 border-[#2080F6] duration-300 ease-in-out"
           >
-            افزودن
+            {isLoading ? (
+              <Loding className2={"hidden"} className={"h-6 px-1"} />
+            ) : (
+              "افزودن"
+            )}
           </button>
         </div>
       </div>

@@ -18,9 +18,11 @@ import { toast } from "react-toastify";
 import Loding from "../../../components/common/loding";
 
 const SingleList = ({
+  action,
   index,
   singleThesis,
   lastIndex,
+  pageNumber,
   download_dissertation,
   download_sourat,
   type,
@@ -63,9 +65,11 @@ const SingleList = ({
       //check repsonse status
       if (response.status === 200) {
         console.log(response);
-        toast(response.message);
+        action(pageNumber);
+        toast.success(response.data.message);
+        isChangeStatus(false);
       } else {
-        toast(response.message);
+        toast.error(response.data.message);
         //error occure
       }
     } catch (error) {
@@ -80,6 +84,7 @@ const SingleList = ({
     try {
       const response = await DownloadFile(addressFile);
       if (response.status === 200) {
+        console.log(response);
         // console.log(response);
         const file = new Blob([response.data], {
           type: fileType,
@@ -200,7 +205,9 @@ const SingleList = ({
           {isChangeStatus ? (
             <div className="flex">
               <Close
-                onClick={() => setIsChangeStatus(false)}
+                onClick={() => {
+                  setIsChangeStatus(false);
+                }}
                 className="text-red-600 w-8 h-8"
               />
               <Done

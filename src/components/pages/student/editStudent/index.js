@@ -4,7 +4,11 @@ import { ReactComponent as Back } from "../../../../assets/svg/backward.svg";
 import { useEffect, useState } from "react";
 import { Cookies } from "react-cookie";
 import { GetAllTeachers, GetUserById } from "../../../../services/supervisor";
-import { GetCollegeUni, UpdateUser } from "../../../../services/student";
+import {
+  GetCollegeUni,
+  GetTeachersByCollegeRef,
+  UpdateUser,
+} from "../../../../services/student";
 import { toast } from "react-toastify";
 import Loding from "../../../common/loding";
 //static data
@@ -60,6 +64,7 @@ const EditStudent = () => {
     asyncGetCollageList();
     asyncGetTeacherList();
   }, []);
+
   const asyncGetUserById = async () => {
     setIsLoading(true);
     try {
@@ -69,6 +74,7 @@ const EditStudent = () => {
       if (response.status === 200) {
         setData(response.data);
         console.log(response);
+        asyncGetTeachersByCollegeRef(response.data.collegeRef);
       } else {
         //error occure
       }
@@ -94,14 +100,13 @@ const EditStudent = () => {
     }
     setIsLoading(false);
   };
-  const asyncGetTeacherList = async () => {
+  const asyncGetTeachersByCollegeRef = async (collegeRef) => {
     setIsLoading(true);
     try {
-      const response = await GetAllTeachers(token);
+      const response = await GetTeachersByCollegeRef(token, collegeRef);
 
       //check repsonse status
       if (response.status === 200) {
-        setTeachers([...response.data]);
         setFilterTeachres([...response.data]);
         // console.log(response);
       } else {
@@ -112,11 +117,29 @@ const EditStudent = () => {
     }
     setIsLoading(false);
   };
+  const asyncGetTeacherList = async () => {
+    setIsLoading(true);
+    try {
+      const response = await GetAllTeachers(token);
+
+      //check repsonse status
+      if (response.status === 200) {
+        setTeachers([...response.data]);
+        // console.log(response);
+      } else {
+        //error occure
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    setIsLoading(false);
+  };
   const filterteachers = (e) => {
-    const result = teachers.filter(
-      (item) => Number(item.collegRef) === Number(e.target.value)
-    );
-    setFilterTeachres(result);
+    // const result = teachers.filter(
+    //   (item) => Number(item.collegRef) === Number(e.target.value)
+    // );
+    // setFilterTeachres(result);
+    asyncGetTeachersByCollegeRef(e.target.value);
     updateData(e);
   };
 

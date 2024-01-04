@@ -111,3 +111,15 @@ export async function UpdateUser(token, data, id) {
   );
   return apiCall;
 }
+
+export async function GetTeachersByCollegeRef(token, collegeRef) {
+  const apiCall = await useFetch().get(
+    `/GetTeachersByCollegeRef?CollegeRef=${collegeRef}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return apiCall;
+}

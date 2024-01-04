@@ -12,6 +12,7 @@ const SingleDessertationExpert = ({
   singleDissertationExpert,
   index,
   lastIndex,
+  action,
 }) => {
   const [enabled, setEnabled] = useState(false);
   const [isShowDeleteModal, setIsShowDeleteModal] = useState(false);
@@ -31,6 +32,7 @@ const SingleDessertationExpert = ({
       if (response.status === 200) {
         setIsShowDeleteModal(false);
         toast.success("تغییرات با موفقیت ثبت شد");
+        action();
         // console.log(response.data);
       } else {
         //error occure
