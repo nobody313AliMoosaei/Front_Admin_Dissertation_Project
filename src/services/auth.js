@@ -8,3 +8,11 @@ export async function PostUserData({ userName, password }) {
   });
   return apiCall;
 }
+export async function GetRefreshToken(token) {
+  const apiCall = await useFetch().get("/IsValidUser", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return apiCall;
+}

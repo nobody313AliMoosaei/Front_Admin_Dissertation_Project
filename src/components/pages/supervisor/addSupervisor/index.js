@@ -76,7 +76,7 @@ const AddSupervisor = () => {
         //error occure
       }
     } catch (error) {
-      toast.error("استاد راهنما با اضافه نشد.");
+      toast.error("استاد راهنما اضافه نشد.");
       console.log(error);
     }
     setIsLoading(false);

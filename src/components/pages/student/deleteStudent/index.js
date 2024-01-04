@@ -9,19 +9,20 @@ const DeleteStudentModal = ({
   name,
   isShowModal,
   closeModalHandler,
+  active,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   return (
     <ModalWrapper isShowedModal={isShowModal} onCloseModal={closeModalHandler}>
       <div className="flex flex-col items-center justify-center gap-7">
         <span className="text-xl font-medium text-[#353535]">
-          آیا از غیر فعال کردن {name} مطمئن هستید؟
+          آیا از {active ? "غیر فعال" : "فعال"} کردن {name} مطمئن هستید؟
         </span>
 
         <div className="flex items-center justify-between w-full">
           <LoadingBtn
             isLoading={isLoading}
-            text="غیرفعال"
+            text={active ? "غیر فعال" : "فعال"}
             action={action}
             className="border w-fit border-[#2080F6] text-white bg-[#2080F6] rounded-xl"
           />

@@ -16,6 +16,7 @@ import {
 } from "../../services/supervisor";
 import Loding from "../../components/common/loding";
 import { GetUserInRole } from "../../services/dissertationExpert";
+import { GetReportSystemCount } from "../../services/dashboard";
 //static data
 const tableHeader = [
   {
@@ -70,6 +71,7 @@ const supervisors = [
 
 const Supervisor = () => {
   const [page, setPage] = useState(1);
+  const [count, setCount] = useState(0);
   const [data, setData] = useState([]);
   const [college, setColleges] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -81,7 +83,26 @@ const Supervisor = () => {
     // asyncGetAllTeachers();
     asyncGetUserInRole();
     asyncGetCollageList();
+    asyncGetReportSystemCount();
   }, []);
+  const asyncGetReportSystemCount = async () => {
+    setIsLoading(true);
+    try {
+      const response = await GetReportSystemCount();
+      // const response = await GetCollegeUni(token);
+
+      //check repsonse status
+      if (response.status === 200) {
+        // console.log(response);
+        setCount(response.data.teachersCount);
+      } else {
+        //error occure
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    setIsLoading(false);
+  };
   const asyncGetUserInRole = async () => {
     setIsLoading(true);
     try {
@@ -180,7 +201,8 @@ const Supervisor = () => {
           <div className="flex items-center gap-10">
             <h2 className="text-xl font-semibold "> اطلاعات استاد راهنما </h2>
             <span className="text-[#2080F6] bg-[#EBF1FD] py-1 px-4 rounded-full">
-              100<span>استاد راهنما</span>
+              {count}
+              <span>استاد راهنما</span>
             </span>
           </div>
           <Link className="self-end" to={"add"}>

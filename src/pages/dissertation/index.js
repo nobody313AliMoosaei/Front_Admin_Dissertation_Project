@@ -164,7 +164,7 @@ const Dissertation = () => {
               key={index}
               index={index}
               singleThesis={singleThesis}
-              lastIndex={thesis.length - 1}
+              // lastIndex={thesis.length - 1}
             />
           ))}
       </div>

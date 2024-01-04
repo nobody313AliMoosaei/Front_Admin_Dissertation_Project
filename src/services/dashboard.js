@@ -12,11 +12,11 @@ export async function GetCollegeUni() {
   return apiCall;
 }
 
-export async function AddNewCollege(token, title, dsr) {
+export async function AddNewCollege(token, title, dsr, code = 0) {
   const apiCall = await useFetch().post(
     `/AddNewCollege`,
     {
-      code: 0,
+      code: code,
       title: title,
       dsr: dsr,
     },

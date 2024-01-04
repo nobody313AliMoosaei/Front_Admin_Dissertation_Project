@@ -14,6 +14,7 @@ import { GetAllstatus } from "../../services/common";
 import TableHeader from "../../components/common/tableHeader";
 import SingleListCollege from "./singlelistCollege";
 import { Cookies } from "react-cookie";
+import { toast } from "react-toastify";
 const tableHeader = [
   {
     title: "#",
@@ -73,17 +74,21 @@ const Dashboard = () => {
   };
   const asyncAddNewCollege = async () => {
     const token = cookies.get("token");
-    const { title, dsr } = dataCollegeAdd;
+    const { title, dsr, code } = dataCollegeAdd;
+    // const code = dataCollege[dataCollege.length - 1].code + 1;
     setIsLoading(true);
     try {
-      const response = await AddNewCollege(token, title, dsr);
+      const response = await AddNewCollege(token, title, dsr, code);
       // const response2 = await GetAllstatus();
 
       //check repsonse status
       if (response.status === 200) {
         console.log(response);
+        toast.success(response.data.message);
+        setIsAddCollege(false);
         // setData(response.data);
       } else {
+        toast.error(response.data.errorList[0]);
         // console.log(response);
         //error occure
       }
@@ -195,7 +200,7 @@ const Dashboard = () => {
         </div>
       </div>
       {isAddCollege ? (
-        <div className="absolute flex justify-center items-center w-full h-full z-10 bg-[#76767694] top-0 right-0">
+        <div className="fixed flex justify-center items-center w-full h-full z-10 bg-[#76767694] top-0 right-0">
           <div className="flex flex-col bg-white p-5 rounded-sm w-8/12">
             <div className="flex flex-col-reverse gap-y-5">
               <span className="text-xl font-bold">افزودن دانشکده</span>
@@ -207,6 +212,11 @@ const Dashboard = () => {
               </button>
             </div>
             <div className="grid self-center w-full grid-cols-1 p-5 bg-white rounded-md md:grid-cols-2 gap-x-16 gap-y-3">
+              <span className="col-span-2">
+                <span className="font-bold mx-1 text-red-500">نکته :</span>
+                صورتی که کد دانشکده صفر یا خالی وارد شود به صورت خودکار در سیستم
+                تنظیم میشود.
+              </span>
               <div className="flex flex-col gap-1">
                 <label className="font-medium">عنوان</label>
                 <input
@@ -222,6 +232,15 @@ const Dashboard = () => {
                   name="dsr"
                   onChange={updateData}
                   placeholder="توضیحات را وارد کنید"
+                  className="border-2 h-10 rounded-md px-2 border-[#9B9B9B]"
+                />
+              </div>
+              <div className="flex flex-col gap-1">
+                <label className="font-medium">کد دانشکده</label>
+                <input
+                  name="code"
+                  onChange={updateData}
+                  placeholder="کد دانشکده را وارد کنید"
                   className="border-2 h-10 rounded-md px-2 border-[#9B9B9B]"
                 />
               </div>

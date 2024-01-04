@@ -44,7 +44,7 @@ export async function GetUserById(id) {
 }
 
 export async function UpdateTeacher(token, data, id) {
-  const apiCall = await useFetch().put(
+  const apiCall = await useFetch().post(
     `/UpdateTeacher?TeacherId=${Number(id)}`,
     {
       firstName: data.firsName,

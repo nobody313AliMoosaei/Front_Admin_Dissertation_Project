@@ -1,5 +1,5 @@
 //SVG
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { ReactComponent as Back } from "../../../../assets/svg/backward.svg";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -46,6 +46,7 @@ const EditSupervisor = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingBtn, setIsLoadingBtn] = useState(false);
   const [college, setColleges] = useState([]);
+  const navigate = useNavigate();
   const cookies = new Cookies();
   const [token, setCookie] = useState(cookies.get("token"));
 
@@ -102,7 +103,8 @@ const EditSupervisor = () => {
       //check repsonse status
       if (response.status === 200) {
         console.log(response);
-        toast.error("تغییرات با موفقیت اعمال شد.");
+        toast.success("تغییرات با موفقیت اعمال شد.");
+        navigate(`/admin/supervisor`);
       } else {
         toast.error("مشکل در اعمال تغییرات");
         //error occure
@@ -153,7 +155,7 @@ const EditSupervisor = () => {
               <select
                 name="collegeRef"
                 onChange={updateData}
-                defaultValue={data.collegeRef || ""}
+                value={data.collegeRef || ""}
                 className="border-2 border-[#9B9B9B] rounded-md mt-1 h-10 p-1 sm:text-base text-sm "
               >
                 <option disabled selected value="">

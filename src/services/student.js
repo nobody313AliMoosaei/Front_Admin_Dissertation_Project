@@ -35,7 +35,7 @@ export async function GetUserById(id) {
 }
 
 export async function DeActiveUser(token, UserId) {
-  const apiCall = await useFetch().put(`/DeActiveUser?UserId=${UserId}`, {
+  const apiCall = await useFetch().post(`/DeActiveUser?UserId=${UserId}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -90,7 +90,7 @@ export async function UpdateUser(token, data, id) {
   // formData.append("collegeRef", data.CollegeRef);
   // formData.append("teacher1_Ref", data.Teacher_1);
   console.log(data);
-  const apiCall = await useFetch().put(
+  const apiCall = await useFetch().post(
     `/UpdateUser`,
     {
       userId: Number(id),

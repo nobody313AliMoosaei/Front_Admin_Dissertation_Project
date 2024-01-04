@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import DeleteStudentModal from "../deleteStudent";
 import { DeActiveUser } from "../../../../services/student";
 import { Cookies } from "react-cookie";
+import { toast } from "react-toastify";
 
 const SingleStudentCard = ({ singleStudent, index, lastIndex }) => {
   const [enabled, setEnabled] = useState(false);
@@ -21,6 +22,8 @@ const SingleStudentCard = ({ singleStudent, index, lastIndex }) => {
       //check repsonse status
       if (response.status === 200) {
         // console.log(response.data);
+        toast.success("تغییرات با موفقیت ثبت شد");
+        setIsShowDeleteModal(false);
       } else {
         //error occure
       }
@@ -97,6 +100,7 @@ const SingleStudentCard = ({ singleStudent, index, lastIndex }) => {
             isShowModal={isShowDeleteModal}
             action={asyncDeActiveUser}
             closeModalHandler={() => setIsShowDeleteModal(false)}
+            active={singleStudent.active}
           />
         )}
       </div>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Cookies } from "react-cookie";
 import { DeleteCollege } from "../../../services/dashboard";
+import { toast } from "react-toastify";
 
 const SingleListCollege = ({ index, singleData }) => {
   const [isShowDelete, setIsShowDelete] = useState(false);
@@ -11,12 +12,13 @@ const SingleListCollege = ({ index, singleData }) => {
     const token = cookies.get("token");
     setIsLoading(true);
     try {
-      const response = await DeleteCollege(token, singleData.code);
+      const response = await DeleteCollege(token, singleData.id);
       // const response2 = await GetAllstatus();
 
       //check repsonse status
       if (response.status === 200) {
         setIsShowDelete(false);
+        toast.success(response.data.message);
         console.log(response);
       } else {
         //error occure

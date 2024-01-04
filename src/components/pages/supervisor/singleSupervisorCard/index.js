@@ -6,6 +6,7 @@ import DeleteSupervisorModal from "../deleteSupervisor";
 import { Cookies } from "react-cookie";
 import { DeActiveUser } from "../../../../services/student";
 import DeleteStudentModal from "../../student/deleteStudent";
+import { toast } from "react-toastify";
 
 const SingleSuperviserCard = ({ singleSupervisor, index, lastIndex }) => {
   const [enabled, setEnabled] = useState(false);
@@ -22,6 +23,8 @@ const SingleSuperviserCard = ({ singleSupervisor, index, lastIndex }) => {
       //check repsonse status
       if (response.status === 200) {
         // console.log(response.data);
+        toast.success("تغییرات با موفقیت ثبت شد.");
+        setIsShowDeleteModal(false);
       } else {
         //error occure
       }
@@ -101,7 +104,7 @@ const SingleSuperviserCard = ({ singleSupervisor, index, lastIndex }) => {
             name={singleSupervisor.firsName + " " + singleSupervisor.lastName}
             isShowModal={isShowDeleteModal}
             action={asyncDeActiveUser}
-            closeModalHandler={() => setIsShowDeleteModal(false)}
+            active={singleSupervisor.active}
           />
         )}
       </div>

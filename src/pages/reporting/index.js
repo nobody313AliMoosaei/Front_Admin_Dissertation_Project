@@ -42,21 +42,21 @@ const Reporting = () => {
           <div className="flex flex-col gap-5">
             <div
               onClick={() => asyncDownloadFile(20, "جدول نقش های سیستم")}
-              className="flex items-center text-xl w-fit"
+              className="flex items-center text-xl w-fit cursor-pointer hover:text-[#4a82d2]"
             >
               <Exel className="w-10 h-10" />
               <span>جدول نقش های سیستم</span>
             </div>
             <div
               onClick={() => asyncDownloadFile(21, "جدول تمام کاربران سیستم")}
-              className="flex items-center text-xl w-fit"
+              className="flex items-center text-xl w-fit cursor-pointer hover:text-[#4a82d2]"
             >
               <Exel className="w-10 h-10" />
               <span>جدول تمام کاربران سیستم</span>
             </div>
             <div
               onClick={() => asyncDownloadFile(22, "جدول تمام کامنت های سیستم")}
-              className="flex items-center text-xl w-fit"
+              className="flex items-center text-xl w-fit cursor-pointer hover:text-[#4a82d2]"
             >
               <Exel className="w-10 h-10" />
               <span>جدول تمام کامنت های سیستم</span>
@@ -65,14 +65,14 @@ const Reporting = () => {
               onClick={() =>
                 asyncDownloadFile(23, "جدول تمام پایان نامه های سیستم")
               }
-              className="flex items-center text-xl w-fit"
+              className="flex items-center text-xl w-fit cursor-pointer hover:text-[#4a82d2]"
             >
               <Exel className="w-10 h-10" />
               <span>جدول تمام پایان نامه های سیستم</span>
             </div>
             <div
               onClick={() => asyncDownloadFile(24, "جدول تمام لاگ های سیستم")}
-              className="flex items-center text-xl w-fit"
+              className="flex items-center text-xl w-fit cursor-pointer hover:text-[#4a82d2]"
             >
               <Exel className="w-10 h-10" />
               <span>جدول تمام لاگ های سیستم</span>

@@ -1,10 +1,12 @@
 //SVG
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { ReactComponent as Back } from "../../../../assets/svg/backward.svg";
 import { useEffect, useState } from "react";
 import { Cookies } from "react-cookie";
 import { GetAllTeachers, GetUserById } from "../../../../services/supervisor";
 import { GetCollegeUni, UpdateUser } from "../../../../services/student";
+import { toast } from "react-toastify";
+import Loding from "../../../common/loding";
 //static data
 const student = {
   fname: "علی",
@@ -38,9 +40,11 @@ const EditStudent = () => {
   const { id } = useParams();
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingBtn, setIsLoadingBtn] = useState(false);
   const [teachers, setTeachers] = useState([]);
   const [colleges, setColleges] = useState([]);
   const [filterTeachers, setFilterTeachres] = useState([]);
+  const navigate = useNavigate();
   const cookies = new Cookies();
   const [token, setCookie] = useState(cookies.get("token"));
 
@@ -123,8 +127,11 @@ const EditStudent = () => {
       //check repsonse status
       if (response.status === 200) {
         console.log(response);
+        toast.success("تغییرات با موفقیت اعمال شد.");
+        navigate(`/admin/student`);
       } else {
         //error occure
+        toast.error("مشکل در اعمال تغییرات");
       }
     } catch (error) {
       console.log(error);
@@ -169,14 +176,14 @@ const EditStudent = () => {
             <select
               name="collegeRef"
               onChange={filterteachers}
-              defaultValue={data.collegeRef || ""}
+              value={data.collegeRef || ""}
               className="border-2 border-[#9B9B9B] rounded-md mt-1 h-10 p-1 sm:text-base text-sm "
             >
               <option disabled selected defaultValue={""}>
                 دانشکده مورد نظر خود را انتخاب کنید
               </option>
               {colleges.map((option, index) => (
-                <option key={index} Value={option.code}>
+                <option key={index} value={option.id}>
                   {option.title}
                 </option>
               ))}
@@ -251,7 +258,11 @@ const EditStudent = () => {
             onClick={asyncUpdateUser}
             className="md:col-span-2 w-fit justify-self-end mt-5 bg-[#2080F6] text-white p-2 rounded-md hover:bg-white hover:text-[#2080F6] border-2 border-[#2080F6] duration-300 ease-in-out"
           >
-            دخیره تغییرات
+            {isLoading ? (
+              <Loding className={"px-8 h-6"} className2={"hidden"} />
+            ) : (
+              "دخیره تغییرات"
+            )}
           </button>
         </div>
       </div>
