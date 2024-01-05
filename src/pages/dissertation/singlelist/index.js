@@ -87,7 +87,7 @@ const SingleList = ({
         console.log(response);
         // console.log(response);
         const file = new Blob([response.data], {
-          type: fileType,
+          type: response.headers["content-type"],
         });
         const url = window.URL.createObjectURL(file);
         console.log(url);

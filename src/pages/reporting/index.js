@@ -12,10 +12,11 @@ const Reporting = () => {
     try {
       const response = await ExportExcel(id);
       if (response.status === 200) {
-        // console.log(response);
+        // console.log(response.headers["content-type"]);
         const file = new Blob([response.data], {
-          type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          type: response.headers["content-type"],
         });
+        // console.log(file);
         const url = window.URL.createObjectURL(file);
         // console.log(url);
         var a = document.createElement("a");
