@@ -39,6 +39,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     asyncGetReportSystemCount();
+    asyncGetCollegeUni();
   }, []);
   const updateData = (e) => {
     setDataCollegeAdd({
@@ -51,7 +52,6 @@ const Dashboard = () => {
     setIsLoading(true);
     try {
       const response = await GetReportSystemCount();
-      const response2 = await GetCollegeUni();
       // const response2 = await GetAllstatus();
 
       //check repsonse status
@@ -61,9 +61,21 @@ const Dashboard = () => {
       } else {
         //error occure
       }
-      if (response2.status === 200) {
-        // console.log(response2);
-        setDataCollege(response2.data);
+    } catch (error) {
+      console.log(error);
+    }
+    setIsLoading(false);
+  };
+  const asyncGetCollegeUni = async () => {
+    setIsLoading(true);
+    try {
+      const response = await GetCollegeUni();
+      // const response2 = await GetAllstatus();
+
+      //check repsonse status
+      if (response.status === 200) {
+        // console.log(response);
+        setDataCollege(response.data);
       } else {
         //error occure
       }
@@ -86,6 +98,7 @@ const Dashboard = () => {
         console.log(response);
         toast.success(response.data.message);
         setIsAddCollege(false);
+        asyncGetCollegeUni();
         // setData(response.data);
       } else {
         toast.error(response.data.errorList[0]);
@@ -103,6 +116,7 @@ const Dashboard = () => {
       <div className="px-2 bg-white rounded-b-md ">
         {dataCollege.map((singleThesis, index) => (
           <SingleListCollege
+            action={() => asyncGetCollegeUni()}
             key={index}
             index={index}
             singleData={singleThesis}

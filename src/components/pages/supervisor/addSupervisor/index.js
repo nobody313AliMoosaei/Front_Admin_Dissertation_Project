@@ -66,7 +66,8 @@ const AddSupervisor = () => {
   };
 
   const asyncAddNewTeacher = async () => {
-    if (data.CollegeRef === undefined || data.CollegeRef === "") {
+    console.log(data);
+    if (data.collegeRef === undefined || data.collegeRef === "") {
       toast.error("اطلاعات کاربر ناقص است");
     } else {
       setIsLoading(true);
@@ -80,7 +81,8 @@ const AddSupervisor = () => {
           toast.success("استاد راهنما با موفقیت اضافه شد.");
         } else {
           //error occure
-          toast.error(response.data.message);
+          console.log(response);
+          toast.error(response.data.errorList[0]);
         }
       } catch (error) {
         console.log(error);

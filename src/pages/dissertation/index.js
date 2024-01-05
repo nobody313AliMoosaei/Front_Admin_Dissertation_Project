@@ -187,7 +187,7 @@ const Dissertation = () => {
               <p className="text-xl font-bold">پایان نامه ها</p>
               <span className="text-[#2080F6] bg-[#EBF1FD] py-1 px-4 rounded-full">
                 {count}
-                <span className="px-2">عدد</span>
+                <span className="px-2">پایان‌نامه</span>
               </span>
             </div>
           </div>

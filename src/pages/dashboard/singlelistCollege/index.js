@@ -3,7 +3,7 @@ import { Cookies } from "react-cookie";
 import { DeleteCollege } from "../../../services/dashboard";
 import { toast } from "react-toastify";
 
-const SingleListCollege = ({ index, singleData }) => {
+const SingleListCollege = ({ index, singleData, action }) => {
   const [isShowDelete, setIsShowDelete] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const cookies = new Cookies();
@@ -19,6 +19,7 @@ const SingleListCollege = ({ index, singleData }) => {
       if (response.status === 200) {
         setIsShowDelete(false);
         toast.success(response.data.message);
+        action();
         console.log(response);
       } else {
         //error occure

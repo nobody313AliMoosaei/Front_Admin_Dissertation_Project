@@ -47,7 +47,7 @@ const AddGraduateExpert = () => {
         navigate(`/admin/graduateexpert`);
         console.log(response);
       } else {
-        toast.error(response.data.message);
+        toast.error(response.data.errorList[0]);
         //error occure
       }
     } catch (error) {

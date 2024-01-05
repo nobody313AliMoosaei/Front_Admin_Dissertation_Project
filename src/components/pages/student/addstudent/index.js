@@ -106,7 +106,7 @@ const AddStudent = () => {
         } else {
           //error occure
           console.log(response);
-          toast.error(response.data.message);
+          toast.error(response.data.errorList[0]);
         }
       } catch (error) {
         console.log(error);

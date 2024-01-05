@@ -71,7 +71,7 @@ const AddDissertationExpert = () => {
         navigate(`/admin/dissertationexpert`);
         console.log(response);
       } else {
-        toast.success(response.data.message);
+        toast.error(response.data.errorList[0]);
         //error occure
       }
     } catch (error) {

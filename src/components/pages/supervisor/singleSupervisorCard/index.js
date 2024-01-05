@@ -111,6 +111,7 @@ const SingleSuperviserCard = ({
             isShowModal={isShowDeleteModal}
             action={asyncDeActiveUser}
             active={singleSupervisor.active}
+            closeModalHandler={() => setIsShowDeleteModal(false)}
           />
         )}
       </div>
