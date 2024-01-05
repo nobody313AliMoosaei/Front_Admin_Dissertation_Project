@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import LoadingBtn from "../../common/loadingBtn";
 
 const Login = () => {
-  const [cookies, setCookies] = useCookies(["token"]);
+  const [cookies, setCookie] = useCookies(["token", "fullName"]);
   const navigate = useNavigate();
 
   const [error, setError] = useState({});
@@ -35,10 +35,15 @@ const Login = () => {
       .then((response) => {
         // console.log(response);
         if (response.status === 200) {
-          setCookies("token", response.data.token);
-          setCookies("fullName", response.data.fullName);
-          toast.success("با موفقیت وارد شدید");
-          navigate(`/admin`);
+          console.log(response);
+          if (response.data.role === "Administrator") {
+            setCookie("token", response.data.token, { path: "/" });
+            setCookie("fullName", response.data.fullName, { path: "/" });
+            toast.success("با موفقیت وارد شدید");
+            navigate(`/admin`);
+          } else {
+            toast.error("اطلاعات وارد شده صحیح نمیباشد");
+          }
         } else {
           //error occurre
           console.log("response : ", response);

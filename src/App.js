@@ -28,6 +28,7 @@ import AddGraduateExpert from "./components/pages/graduateExpert/addGraduateExpe
 import EditGraduateExpert from "./components/pages/graduateExpert/editGraduateExpert";
 import Profile from "./pages/profile";
 import Reporting from "./pages/reporting";
+import Logout from "./components/common/logout";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
         <Route path="admin" element={<Layout />}>
           <Route path="/admin" element={<Dashboard />} />
           <Route path="profile" element={<Profile />} />
+          <Route path="logout" element={<Logout />} />
           {/* student Route */}
           <Route path="student" element={<Student />} />
           <Route path="dissertation" element={<Dissertation />} />

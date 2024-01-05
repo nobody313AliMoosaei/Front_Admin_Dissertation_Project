@@ -114,7 +114,9 @@ const SingleList = ({
           index !== lastIndex ? "border-b" : ""
         } text-center justify-items-center bg-white py-3 items-center my-2 font-medium text-[#74787C]`}
       >
-        <span className="col-span-1 ">{index + 1}</span>
+        <span className="col-span-1 ">
+          {5 * (pageNumber - 1) + (index + 1)}
+        </span>
         {/* <span className="col-span-1 w-full truncate">{singleThesis.name}</span> */}
         <span className="col-span-3 w-full truncate">
           {" "}

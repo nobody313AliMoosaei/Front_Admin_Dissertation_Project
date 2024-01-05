@@ -46,7 +46,9 @@ const SingleStudentCard = ({
           index !== lastIndex ? "border-b" : ""
         } text-center justify-items-center bg-white py-3 items-center  my-2 font-medium text-[#74787C]`}
       >
-        <span className="col-span-1 text-center">{index + 1}</span>
+        <span className="col-span-1 text-center">
+          {5 * (pageNumber - 1) + (index + 1)}
+        </span>
         <span className="w-full col-span-1 truncate">
           {singleStudent.firsName}
         </span>
